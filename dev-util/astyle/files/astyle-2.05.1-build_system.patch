@@ -1,0 +1,40 @@
+--- a/build/gcc/Makefile
++++ b/build/gcc/Makefile
+@@ -34,15 +34,15 @@
+ ipath=$(prefix)/bin
+ CBASEFLAGS = -W -Wall -fno-rtti -fno-exceptions
+ JAVAINCS   = -I$(JAVA_HOME)/include
+-CXX = g++
++CXX ?= g++
+ INSTALL=install -o $(USER) -g $(USER)
+ 
+ ##################################################
+ 
+ # define compile options for each build
+-ifdef CFLAGS
+-    CFLAGSr   = -DNDEBUG $(CBASEFLAGS) $(CFLAGS)
+-    CFLAGSd   = -g $(CBASEFLAGS) $(CFLAGS)
++ifdef CXXFLAGS
++    CFLAGSr   = -DNDEBUG $(CBASEFLAGS) $(CXXFLAGS)
++    CFLAGSd   = -g $(CBASEFLAGS) $(CXXFLAGS)
+ else
+     CFLAGSr   = -DNDEBUG -O3 $(CBASEFLAGS)
+     CFLAGSd   = -g $(CBASEFLAGS)
+@@ -134,7 +134,7 @@
+ shared:  libastyle-2.05.1.so
+ libastyle-2.05.1.so:  $(OBJs)
+ 	@ mkdir -p $(bindir)
+-	$(CXX) -shared $(LDFLAGSr) -o $(bindir)/$@ $^
++	$(CXX) -shared -Wl,-soname,$@.0 $(LDFLAGSr) -o $(bindir)/$@.0.0.0 $^
+ 	@ echo
+ 
+ shareddebug:  libastyle-2.05.1d.so
+@@ -158,7 +158,7 @@
+ java:  libastyle-2.05.1j.so
+ libastyle-2.05.1j.so:  $(OBJsj)
+ 	@ mkdir -p $(bindir)
+-	$(CXX) -shared $(LDFLAGSr) -o $(bindir)/$@ $^
++	$(CXX) -shared -Wl,-soname,$@.0 $(LDFLAGSr) -o $(bindir)/$@.0.0.0 $^
+ 	@ echo
+ 
+ javadebug:  libastyle-2.05.1jd.so

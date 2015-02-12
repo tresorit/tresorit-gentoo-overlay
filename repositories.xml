@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name><![CDATA[tresorit]]></name>
+    <description lang="en"><![CDATA[Gentoo overlay for Tresorit Core development]]></description>
+    <homepage>https://bitbucket.org/tresorit/gentoo-overlay/overview</homepage>
+    <owner>
+      <email>david.dvorszki@tresorit.com</email>
+    </owner>
+    <source type="git">https://bitbucket.org/tresorit/gentoo-overlay.git</source>
+  </repo>
+</repositories>
+
