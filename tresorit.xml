@@ -4,11 +4,11 @@
   <repo quality="experimental" status="unofficial">
     <name><![CDATA[tresorit]]></name>
     <description lang="en"><![CDATA[Gentoo overlay for Tresorit Core development]]></description>
-    <homepage>https://bitbucket.org/tresorit/gentoo-overlay/overview</homepage>
+    <homepage>https://github.com/tresorit/tresorit-gentoo-overlay</homepage>
     <owner>
       <email>david.dvorszki@tresorit.com</email>
     </owner>
-    <source type="git">https://bitbucket.org/tresorit/gentoo-overlay.git</source>
+    <source type="git">http://github.com/tresorit/tresorit-gentoo-overlay/commits/master.atom</source>
   </repo>
 </repositories>
 

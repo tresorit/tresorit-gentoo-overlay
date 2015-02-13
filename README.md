@@ -5,9 +5,8 @@ This is a [Portage overlay][overlay] to install Tresorit Core development relate
 ## Install
 
 1. Make sure you have [layman][layman] installed.
-2. Download *repositories.xml*
-3. Run `sudo cp repositories.xml /etc/layman/overlays && layman -S && layman -a tresorit`.
-4. You can now emerge packages from the overlay and eix-sync will refresh the repository.
+2. Run `sudo layman -f -o https://raw.githubusercontent.com/tresorit/tresorit-gentoo-overlay/master/tresorit.xml -a tresorit`.
+3. You can now emerge packages from the overlay and eix-sync will refresh the repository.
 
 ## Packages provided
 
