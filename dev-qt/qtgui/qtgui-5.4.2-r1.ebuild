@@ -1,37 +1,37 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/qtgui/qtgui-5.4.1-r2.ebuild,v 1.1 2015/05/16 18:51:53 kensington Exp $
+# $Id$
 
 EAPI=5
-
 QT5_MODULE="qtbase"
-
 inherit qt5-build
 
 DESCRIPTION="The GUI module and platform plugins for the Qt5 framework"
 
-if [[ ${QT5_BUILD_TYPE} == live ]]; then
-	KEYWORDS="~ppc64"
-else
+if [[ ${QT5_BUILD_TYPE} == release ]]; then
 	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ppc64 ~x86"
 fi
 
-# TODO: directfb, linuxfb, offscreen (auto-depends on X11)
+# TODO: directfb, linuxfb, kms integration in eglfs
 
-IUSE="accessibility egl eglfs evdev +gif gles2 gtkstyle +harfbuzz ibus jpeg kms +opengl +png udev +xcb"
+IUSE="accessibility dbus egl eglfs evdev +gif gles2 gtkstyle
+	+harfbuzz ibus jpeg +png +udev +xcb"
 REQUIRED_USE="
-	egl? ( evdev opengl )
+	|| ( eglfs xcb )
+	accessibility? ( dbus xcb )
+	egl? ( evdev )
 	eglfs? ( egl )
-	gles2? ( opengl )
-	kms? ( egl gles2 )
+	ibus? ( dbus )
 "
 
 RDEPEND="
 	dev-libs/glib:2
-	~dev-qt/qtcore-${PV}[debug=]
+	~dev-qt/qtcore-${PV}
 	media-libs/fontconfig
 	media-libs/freetype:2
-	sys-libs/zlib
+	>=sys-libs/zlib-1.2.5
+	virtual/opengl
+	dbus? ( ~dev-qt/qtdbus-${PV} )
 	egl? ( media-libs/mesa[egl] )
 	evdev? ( sys-libs/mtdev )
 	gtkstyle? (
@@ -41,14 +41,7 @@ RDEPEND="
 	)
 	gles2? ( media-libs/mesa[gles2] )
 	harfbuzz? ( >=media-libs/harfbuzz-0.9.32:= )
-	ibus? ( ~dev-qt/qtdbus-${PV}[debug=] )
 	jpeg? ( virtual/jpeg:0 )
-	kms? (
-		media-libs/mesa[gbm]
-		virtual/libudev:=
-		x11-libs/libdrm
-	)
-	opengl? ( virtual/opengl )
 	png? ( media-libs/libpng:0= )
 	udev? ( virtual/libudev:= )
 	xcb? (
@@ -63,31 +56,30 @@ RDEPEND="
 		x11-libs/xcb-util-keysyms
 		x11-libs/xcb-util-renderutil
 		x11-libs/xcb-util-wm
-		accessibility? ( ~dev-qt/qtdbus-${PV}[debug=] )
 	)
 "
 DEPEND="${RDEPEND}
 	evdev? ( sys-kernel/linux-headers )
-	test? ( ~dev-qt/qtnetwork-${PV}[debug=] )
+	udev? ( sys-kernel/linux-headers )
 "
 PDEPEND="
 	ibus? ( app-i18n/ibus )
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-5.4.1-CVE-2015-0295.patch"
-	"${FILESDIR}/${PN}-5.4.1-CVE-2015-1858-1859.patch"
-	"${FILESDIR}/${PN}-5.4.1-CVE-2015-1860.patch"
-	"${FILESDIR}/${PN}-5.4.1-transparent-trayicon.patch"
+	"${FILESDIR}/${PF}-transparent-trayicon.patch"
 )
 
 QT5_TARGET_SUBDIRS=(
 	src/gui
+	src/openglextensions
 	src/platformheaders
 	src/platformsupport
 	src/plugins/generic
 	src/plugins/imageformats
 	src/plugins/platforms
+	src/plugins/platforminputcontexts
+	src/plugins/platformthemes
 )
 
 QT5_GENTOO_CONFIG=(
@@ -109,8 +101,7 @@ QT5_GENTOO_CONFIG=(
 	!harfbuzz:no-harfbuzz:
 	jpeg:system-jpeg:IMAGEFORMAT_JPEG
 	!jpeg:no-jpeg:
-	kms:kms:
-	opengl
+	:opengl
 	png:png:
 	png:system-png:IMAGEFORMAT_PNG
 	!png:no-png:
@@ -125,39 +116,34 @@ QT5_GENTOO_CONFIG=(
 	xcb::XKB
 )
 
-pkg_setup() {
-	use opengl   && QT5_TARGET_SUBDIRS+=(src/openglextensions)
-	use gtkstyle && QT5_TARGET_SUBDIRS+=(src/plugins/platformthemes/gtk2)
-	use ibus     && QT5_TARGET_SUBDIRS+=(src/plugins/platforminputcontexts/ibus)
-	use xcb	     && QT5_TARGET_SUBDIRS+=(src/plugins/platforminputcontexts/compose)
-
+src_prepare() {
 	# egl_x11 is activated when both egl and xcb are enabled
 	use egl && QT5_GENTOO_CONFIG+=(xcb:egl_x11) || QT5_GENTOO_CONFIG+=(egl:egl_x11)
+
+	# avoid automagic dep on qtdbus
+	use dbus || sed -i -e 's/contains(QT_CONFIG, dbus)/false/' \
+		src/platformsupport/platformsupport.pro || die
+
+	qt_use_disable_mod ibus dbus \
+		src/plugins/platforminputcontexts/platforminputcontexts.pro
+
+	qt5-build_src_prepare
 }
 
 src_configure() {
-	local gl="-no-opengl"
-	if use gles2; then
-		gl="-opengl es2"
-	elif use opengl; then
-		gl="-opengl desktop"
-	fi
-
 	local myconf=(
-		$(use accessibility && use xcb && echo -dbus-linked)
-		$(use ibus && echo -dbus-linked)
+		$(usex dbus -dbus-linked '')
 		$(qt_use egl)
 		$(qt_use eglfs)
 		$(qt_use evdev)
 		$(qt_use evdev mtdev)
 		-fontconfig
 		-system-freetype
-		$(use gif || echo -no-gif)
-		${gl}
+		$(usex gif '' -no-gif)
 		$(qt_use gtkstyle)
 		$(qt_use harfbuzz harfbuzz system)
 		$(qt_use jpeg libjpeg system)
-		$(qt_use kms)
+		-opengl $(usex gles2 es2 desktop)
 		$(qt_use png libpng system)
 		$(qt_use udev libudev)
 		$(qt_use xcb xcb system)
