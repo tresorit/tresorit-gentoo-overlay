@@ -7,11 +7,12 @@ inherit eutils fdo-mime gnome2-utils pax-utils unpacker
 
 DESCRIPTION="Spotify is a social music platform"
 HOMEPAGE="https://www.spotify.com/ch-de/download/previews/"
-MY_PV="${PV}.gbdf68615"
-MY_P="${PN}-client_${MY_PV}"
+MY_PV_AMD64="${PV}.124.g4dfabc51"
+MY_PV_I386="${PV}.122.gf29d9be0"
+MY_P="${PN}-client_"
 SRC_BASE="http://repository.spotify.com/pool/non-free/${PN:0:1}/${PN}-client/"
-SRC_URI="amd64? ( ${SRC_BASE}${MY_P}_amd64.deb )
-x86? ( ${SRC_BASE}${MY_P}_i386.deb )"
+SRC_URI="amd64? ( ${SRC_BASE}${MY_P}${MY_PV_AMD64}_amd64.deb )
+	x86? ( ${SRC_BASE}${MY_P}${MY_PV_I386}_i386.deb )"
 LICENSE="Spotify"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -20,21 +21,21 @@ RESTRICT="mirror strip"
 
 DEPEND=""
 RDEPEND="
-${DEPEND}
-dev-libs/nss
-gnome-base/gconf
-media-libs/alsa-lib
-media-libs/harfbuzz
-media-libs/fontconfig
-media-libs/mesa
-net-misc/curl
-net-print/cups[ssl]
-sys-libs/glibc
-x11-libs/gtk+:2
-x11-libs/libXScrnSaver
-x11-libs/libXtst
-pulseaudio? ( media-sound/pulseaudio )
-gnome? ( gnome-extra/gnome-integration-spotify )"
+	${DEPEND}
+	dev-libs/nss
+	gnome-base/gconf
+	media-libs/alsa-lib
+	media-libs/harfbuzz
+	media-libs/fontconfig
+	media-libs/mesa
+	net-misc/curl
+	net-print/cups[ssl]
+	sys-libs/glibc
+	x11-libs/gtk+:2
+	x11-libs/libXScrnSaver
+	x11-libs/libXtst
+	pulseaudio? ( media-sound/pulseaudio )
+	gnome? ( gnome-extra/gnome-integration-spotify )"
 
 S=${WORKDIR}/
 
@@ -43,10 +44,15 @@ QA_PREBUILT="opt/spotify/spotify-client/spotify"
 src_prepare() {
 	# Fix desktop entry to launch spotify-dbus.py for GNOME integration
 	if use gnome ; then
-		sed -i \
-			-e 's/spotify \%U/spotify-dbus.py \%U/g' \
-			usr/share/spotify/spotify.desktop || die "sed failed"
+	sed -i \
+		-e 's/spotify \%U/spotify-dbus.py \%U/g' \
+		usr/share/spotify/spotify.desktop || die "sed failed"
 	fi
+	#TODO: the semicolons will be fixed in 1.0.15, remove it then
+	sed -i \
+		-e 's/x-scheme-handler\/spotify$/x-scheme-handler\/spotify\;/g' \
+		-e 's/AudioVideo$/AudioVideo\;/g' \
+		usr/share/spotify/spotify.desktop || die "sed failed"
 }
 
 src_install() {
@@ -64,8 +70,8 @@ src_install() {
 
 	dodir /usr/bin
 	cat <<-EOF >"${D}"/usr/bin/spotify
-	#! /bin/sh
-	exec ${SPOTIFY_HOME}/spotify "\$@"
+		#! /bin/sh
+		exec ${SPOTIFY_HOME}/spotify "\$@"
 	EOF
 	fperms +x /usr/bin/spotify
 
