@@ -14,6 +14,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
 
+S="${WORKDIR}/kcachegrind-${PV}"
+
 RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5[gif,jpeg,png,xcb]
