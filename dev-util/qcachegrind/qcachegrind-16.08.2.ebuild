@@ -31,3 +31,8 @@ src_configure() {
 			PREFIX="${D}/usr" \
 			GIT_DESCRIBE="${PV}"
 }
+
+src_install() {
+	cd qcachegrind || die
+	emake DESTDIR="${D}" install
+}
