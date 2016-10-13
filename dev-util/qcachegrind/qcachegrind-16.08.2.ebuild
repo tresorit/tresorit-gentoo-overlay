@@ -32,7 +32,15 @@ src_configure() {
 			GIT_DESCRIBE="${PV}"
 }
 
+src_compile() {
+	cd qcachegrind || die
+	emake
+}
+
 src_install() {
 	cd qcachegrind || die
-	emake DESTDIR="${D}" install
+	dodir /usr/bin
+    insinto /usr/bin
+    insopts -m 755
+    doins qcachegrind || die
 }
