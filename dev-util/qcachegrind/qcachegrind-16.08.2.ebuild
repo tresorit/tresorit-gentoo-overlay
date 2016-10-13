@@ -12,7 +12,7 @@ SRC_URI="http://download.kde.org/stable/applications/${PV}/src/kcachegrind-${PV}
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	dev-qt/qtconcurrent:5
