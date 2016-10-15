@@ -19,6 +19,10 @@ DEPEND="sys-devel/gcc:*
 RDEPEND="${DEPEND}"
 QA_PREBUILT="/usr/share/afl/testcases/others/elf/small_exec.elf"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-2.35b-solarized.patch"
+)
+
 src_compile() {
 	emake CC="$(tc-getCC)" \
 		PREFIX="/usr" \
