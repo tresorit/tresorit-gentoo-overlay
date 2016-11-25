@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 inherit cmake-utils
 
@@ -15,15 +15,3 @@ SLOT="0"
 KEYWORDS="amd64"
 
 S="${WORKDIR}/processor-trace-${PV}"
-
-src_prepare() {
-	cmake-utils_src_prepare
-}
-
-src_configure() {
-	cmake-utils_src_configure
-}
-
-src_install() {
-	cmake-utils_src_install
-}
