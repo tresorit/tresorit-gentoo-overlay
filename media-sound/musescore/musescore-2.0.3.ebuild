@@ -29,9 +29,7 @@ RDEPEND="
 	>=media-libs/freetype-2.5.2
 	media-libs/libsndfile
 	sys-libs/zlib
-	audiofile? (
-		media-libs/audiofile
-	)
+	audiofile? ( media-libs/audiofile )
 	jack? ( media-sound/jack-audio-connection-kit )
 	mp3? ( media-sound/lame )
 	portaudio? ( media-libs/portaudio )
@@ -43,7 +41,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	"
 PATCHES=(
-	"${FILESDIR}/${PN}-2.0.2-fix-buildsystem.patch"
+	"${FILESDIR}/${PN}-2.0.3-fix-buildsystem.patch"
 )
 S="${WORKDIR}/MuseScore-${PV}"
 
