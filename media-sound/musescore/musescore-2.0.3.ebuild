@@ -26,11 +26,10 @@ RDEPEND="
 	>=dev-qt/qtsvg-5.3.0:5
 	>=dev-qt/qtwebkit-5.3.0:5
 	>=dev-qt/qtxmlpatterns-5.3.0:5
-	>=media-libs/alsa-lib-1.0.0
 	>=media-libs/freetype-2.5.2
 	media-libs/libsndfile
 	sys-libs/zlib
-	alsa? ( media-libs/alsa-lib )
+	alsa? ( >=media-libs/alsa-lib-1.0.0 )
 	jack? ( media-sound/jack-audio-connection-kit )
 	mp3? ( media-sound/lame )
 	portaudio? ( media-libs/portaudio )
