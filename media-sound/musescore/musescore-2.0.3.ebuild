@@ -13,9 +13,10 @@ SRC_URI="https://github.com/musescore/MuseScore/archive/v${PV}.tar.gz -> ${P}.ta
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="audiofile debug jack mp3 portaudio pulseaudio"
+IUSE="alsa debug jack mp3 portaudio pulseaudio"
 
 RDEPEND="
+	>=dev-qt/designer-5.3.0:5
 	>=dev-qt/qtconcurrent-5.3.0:5
 	>=dev-qt/qtcore-5.3.0:5
 	>=dev-qt/qtdeclarative-5.3.0:5
@@ -29,7 +30,7 @@ RDEPEND="
 	>=media-libs/freetype-2.5.2
 	media-libs/libsndfile
 	sys-libs/zlib
-	audiofile? ( media-libs/audiofile )
+	alsa? ( media-libs/alsa-lib )
 	jack? ( media-sound/jack-audio-connection-kit )
 	mp3? ( media-sound/lame )
 	portaudio? ( media-libs/portaudio )
@@ -47,11 +48,11 @@ S="${WORKDIR}/MuseScore-${PV}"
 
 src_configure() {
 	local mycmakeargs=(
-		-DHAVE_audiofile="$(usex audiofile)"
+		-DBUILD_ALSA="$(usex alsa)"
 		-DBUILD_JACK="$(usex jack)"
 		-DBUILD_LAME="$(usex mp3)"
-		-DUSE_portaudio="$(usex portaudio)"
-		-DUSE_pulseaudio="$(usex pulseaudio)"
+		-DBUILD_PORTAUDIO="$(usex portaudio)"
+		-DBUILD_PULSEAUDIO="$(usex pulseaudio)"
 	)
 	cmake-utils_src_configure
 }
