@@ -16,16 +16,16 @@ KEYWORDS="~amd64 ~x86"
 IUSE="alsa debug jack mp3 portaudio pulseaudio"
 
 RDEPEND="
-	>=dev-qt/designer-5.3.0:5
-	>=dev-qt/qtconcurrent-5.3.0:5
-	>=dev-qt/qtcore-5.3.0:5
-	>=dev-qt/qtdeclarative-5.3.0:5
-	>=dev-qt/qtgui-5.3.0:5
-	>=dev-qt/qthelp-5.3.0:5
-	>=dev-qt/qtprintsupport-5.3.0:5
-	>=dev-qt/qtsvg-5.3.0:5
-	>=dev-qt/qtwebkit-5.3.0:5
-	>=dev-qt/qtxmlpatterns-5.3.0:5
+	dev-qt/designer:5
+	dev-qt/qtconcurrent:5
+	dev-qt/qtcore:5
+	dev-qt/qtdeclarative:5
+	dev-qt/qtgui:5
+	dev-qt/qthelp:5
+	dev-qt/qtprintsupport:5
+	dev-qt/qtsvg:5
+	dev-qt/qtwebkit:5
+	dev-qt/qtxmlpatterns:5
 	>=media-libs/freetype-2.5.2
 	media-libs/libsndfile
 	sys-libs/zlib
@@ -36,7 +36,6 @@ RDEPEND="
 	pulseaudio? ( media-sound/pulseaudio )
 	"
 DEPEND="${RDEPEND}
-	dev-util/cmake
 	dev-qt/linguist-tools:5
 	virtual/pkgconfig
 	"
