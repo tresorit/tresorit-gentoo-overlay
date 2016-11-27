@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2c4fe57..915e00b 100644
+index 2c4fe57..b7a5cde 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -147,23 +147,10 @@ if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
+@@ -147,23 +147,13 @@ if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
        endif()
  endif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
  
@@ -20,7 +20,10 @@ index 2c4fe57..915e00b 100644
 -      set(CMAKE_CXX_FLAGS_RELEASE "-std=c++11 -fPIC -O2 -DNDEBUG -DQT_NO_DEBUG")
 -   endif (MINGW)
 -endif(APPLE)
-+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -fPIE -DNDEBUG -DQT_NO_DEBUG")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fPIE -DNDEBUG -DQT_NO_DEBUG")
++set(CMAKE_CXX_STANDARD 11)
++set(CMAKE_CXX_STANDARD_REQUIRED ON)
++set(CMAKE_CXX_EXTENSIONS OFF)
  
  set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 -set(CMAKE_BUILD_WITH_INSTALL_RPATH ON) # Call CMake with option -DCMAKE_SKIP_RPATH to not set RPATH (Debian packaging requirement)
@@ -28,7 +31,7 @@ index 2c4fe57..915e00b 100644
  set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
  
  # The Mscore version number.
-@@ -450,7 +437,6 @@ if (NOT MINGW AND NOT APPLE)
+@@ -450,7 +440,6 @@ if (NOT MINGW AND NOT APPLE)
      #     set library search path for runtime linker to load the same
      #     qt libraries as we used at compile time
      #
@@ -36,7 +39,7 @@ index 2c4fe57..915e00b 100644
      string(TOUPPER "mscore${MSCORE_INSTALL_SUFFIX}" MAN_MSCORE_UPPER) # Command name shown in uppercase in man pages by convention
      if (${MSCORE_INSTALL_SUFFIX} MATCHES "portable") # Note: "-portable-anything" would match
        # Build portable AppImage as per https://github.com/probonopd/AppImageKit
-@@ -554,11 +540,7 @@ add_custom_command(
+@@ -554,11 +543,7 @@ add_custom_command(
      DEPENDS ${PROJECT_SOURCE_DIR}/all.h
      WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
      )
@@ -257,10 +260,10 @@ index e60d901..d3ba643 100644
  
  xcode_pch(mstyle all)
 diff --git a/mtest/CMakeLists.txt b/mtest/CMakeLists.txt
-index 55072b0..18f6fa0 100644
+index 55072b0..cab1a18 100644
 --- a/mtest/CMakeLists.txt
 +++ b/mtest/CMakeLists.txt
-@@ -113,20 +113,7 @@ target_link_libraries(
+@@ -113,20 +113,10 @@ target_link_libraries(
  
  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
  
@@ -278,11 +281,14 @@ index 55072b0..18f6fa0 100644
 -   endif (MINGW)
 -endif(APPLE)
 -
-+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -fPIE -DNDEBUG -DQT_NO_DEBUG")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fPIE -DNDEBUG -DQT_NO_DEBUG")
++set(CMAKE_CXX_STANDARD 11)
++set(CMAKE_CXX_STANDARD_REQUIRED ON)
++set(CMAKE_CXX_EXTENSIONS OFF)
  
  string(REPLACE ";" ";-I" INC "${QT_INCLUDES}")
  
-@@ -134,17 +121,17 @@ if (APPLE)
+@@ -134,17 +124,17 @@ if (APPLE)
  set_target_properties (
        testutils
        PROPERTIES
