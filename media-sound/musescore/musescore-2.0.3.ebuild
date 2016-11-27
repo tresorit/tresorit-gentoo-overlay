@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit cmake-utils flag-o-matic
+inherit cmake-utils
 
 DESCRIPTION="WYSIWYG Music Score Typesetter"
 HOMEPAGE="http://musescore.org/"
