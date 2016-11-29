@@ -40,7 +40,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	"
 PATCHES=(
-	"${FILESDIR}/${PN}-2.0.3-fix-buildsystem.patch"
+	"${FILESDIR}/${P}-fix-buildsystem.patch"
 )
 
 src_configure() {
