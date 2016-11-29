@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit cmake-utils
+inherit cmake-utils git-r3
 
 DESCRIPTION="WYSIWYG Music Score Typesetter"
 HOMEPAGE="http://musescore.org/"
