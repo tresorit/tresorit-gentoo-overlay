@@ -24,7 +24,7 @@ RDEPEND="
 	dev-qt/qthelp:5
 	dev-qt/qtprintsupport:5
 	dev-qt/qtsvg:5
-	dev-qt/qtwebengine:5
+	dev-qt/qtwebengine:5[widgets]
 	dev-qt/qtwebkit:5
 	dev-qt/qtxmlpatterns:5
 	>=media-libs/freetype-2.5.2
