@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e2e91f3..aa53bd6 100644
+index e2e91f3..7feb7a9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -142,27 +142,13 @@ if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
@@ -24,7 +24,7 @@ index e2e91f3..aa53bd6 100644
 -      set(CMAKE_CXX_FLAGS_RELEASE "-std=gnu++11 -fPIC -O2 -DNDEBUG -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT")
 -   endif (MINGW)
 -endif(APPLE)
-+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fPIE -DNDEBUG -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -DNDEBUG -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT")
 +set(CMAKE_CXX_STANDARD 11)
 +set(CMAKE_CXX_STANDARD_REQUIRED ON)
 +set(CMAKE_CXX_EXTENSIONS ON)
@@ -54,7 +54,7 @@ index e2e91f3..aa53bd6 100644
  precompiled_header(QT_INCLUDES all ${BUILD_PCH})
  
 diff --git a/aeolus/CMakeLists.txt b/aeolus/CMakeLists.txt
-index 7962e87..a23aef3 100644
+index 7962e87..bdcb08d 100644
 --- a/aeolus/CMakeLists.txt
 +++ b/aeolus/CMakeLists.txt
 @@ -43,7 +43,7 @@ add_library (aeolus STATIC
@@ -62,12 +62,12 @@ index 7962e87..a23aef3 100644
        aeolus
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  install(DIRECTORY
 diff --git a/audiofile/CMakeLists.txt b/audiofile/CMakeLists.txt
-index 5b1dd48..0d28df8 100644
+index 5b1dd48..264a14a 100644
 --- a/audiofile/CMakeLists.txt
 +++ b/audiofile/CMakeLists.txt
 @@ -26,7 +26,7 @@ add_library (audiofile STATIC
@@ -75,12 +75,12 @@ index 5b1dd48..0d28df8 100644
        audiofile
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(audiofile all)
 diff --git a/awl/CMakeLists.txt b/awl/CMakeLists.txt
-index bcf5427..1520ed9 100644
+index bcf5427..fec81d8 100644
 --- a/awl/CMakeLists.txt
 +++ b/awl/CMakeLists.txt
 @@ -43,7 +43,7 @@ add_library (
@@ -88,7 +88,7 @@ index bcf5427..1520ed9 100644
        awl
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(awl all)
@@ -106,7 +106,7 @@ index 72faba0..8f9d263 100644
               WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
               VERBATIM
 diff --git a/bww2mxml/CMakeLists.txt b/bww2mxml/CMakeLists.txt
-index d6b7794..acec8b5 100644
+index d6b7794..ad78153 100644
 --- a/bww2mxml/CMakeLists.txt
 +++ b/bww2mxml/CMakeLists.txt
 @@ -49,7 +49,7 @@ if (NOT MINGW AND NOT APPLE)
@@ -114,12 +114,12 @@ index d6b7794..acec8b5 100644
           bww2mxml
           PROPERTIES
 -            COMPILE_FLAGS "-x c++ -include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-+            COMPILE_FLAGS "-x c++ -include ${PROJECT_BINARY_DIR}/all.h -Wall -Wextra -Winvalid-pch"
++            COMPILE_FLAGS "-x c++ -include ${PROJECT_BINARY_DIR}/all.h -fPIC -Wall -Wextra -Winvalid-pch"
           )
  
     target_link_libraries(bww2mxml
 diff --git a/effects/CMakeLists.txt b/effects/CMakeLists.txt
-index a695f1d..cf94cae 100644
+index a695f1d..1f34faf 100644
 --- a/effects/CMakeLists.txt
 +++ b/effects/CMakeLists.txt
 @@ -44,7 +44,7 @@ add_library (effects STATIC
@@ -127,12 +127,12 @@ index a695f1d..cf94cae 100644
        effects
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(effects all)
 diff --git a/fluid/CMakeLists.txt b/fluid/CMakeLists.txt
-index 1dc8d2f..3fede66 100644
+index 1dc8d2f..99f8f57 100644
 --- a/fluid/CMakeLists.txt
 +++ b/fluid/CMakeLists.txt
 @@ -45,7 +45,7 @@ add_library (fluid STATIC
@@ -140,12 +140,12 @@ index 1dc8d2f..3fede66 100644
        fluid
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(fluid all)
 diff --git a/fonttools/CMakeLists.txt b/fonttools/CMakeLists.txt
-index 74a525b..f318f4c 100644
+index 74a525b..2cc0084 100644
 --- a/fonttools/CMakeLists.txt
 +++ b/fonttools/CMakeLists.txt
 @@ -19,5 +19,5 @@ add_executable(
@@ -153,10 +153,10 @@ index 74a525b..f318f4c 100644
  
  target_link_libraries(genft ${QT_LIBRARIES} -lfreetype)
 -set_target_properties(genft PROPERTIES COMPILE_FLAGS "-I/usr/include/freetype2 -g -Wall -Wextra -Winvalid-pch")
-+set_target_properties(genft PROPERTIES COMPILE_FLAGS "-I/usr/include/freetype2 -Wall -Wextra -Winvalid-pch")
++set_target_properties(genft PROPERTIES COMPILE_FLAGS "-I/usr/include/freetype2 -fPIC -Wall -Wextra -Winvalid-pch")
  
 diff --git a/libmscore/CMakeLists.txt b/libmscore/CMakeLists.txt
-index 82e36b2..71d4005 100644
+index 82e36b2..37c7786 100644
 --- a/libmscore/CMakeLists.txt
 +++ b/libmscore/CMakeLists.txt
 @@ -73,7 +73,7 @@ add_library (
@@ -164,12 +164,12 @@ index 82e36b2..71d4005 100644
        libmscore
        PROPERTIES
 -         COMPILE_FLAGS "-g ${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch -Woverloaded-virtual"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch -Woverloaded-virtual"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch -Woverloaded-virtual"
        )
  
  xcode_pch(libmscore all)
 diff --git a/manual/CMakeLists.txt b/manual/CMakeLists.txt
-index cf6edca..ceffd73 100644
+index cf6edca..9eb8492 100644
 --- a/manual/CMakeLists.txt
 +++ b/manual/CMakeLists.txt
 @@ -36,13 +36,13 @@ if(APPLE)
@@ -177,19 +177,19 @@ index cf6edca..ceffd73 100644
        genManual
        PROPERTIES
 -      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -g -Wall -Wextra"
-+      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -Wall -Wextra"
++      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -fPIC -Wall -Wextra"
        )
  else(APPLE)
  set_target_properties (
        genManual
        PROPERTIES
 -      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
-+      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -Wall -Wextra"
++      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -fPIC -Wall -Wextra"
        )
  endif(APPLE)
  
 diff --git a/midi/CMakeLists.txt b/midi/CMakeLists.txt
-index 05fbb83..ea95480 100644
+index 05fbb83..bf79c9e 100644
 --- a/midi/CMakeLists.txt
 +++ b/midi/CMakeLists.txt
 @@ -27,7 +27,7 @@ add_library (midi STATIC
@@ -197,12 +197,12 @@ index 05fbb83..ea95480 100644
        midi
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(midi all)
 diff --git a/miditools/CMakeLists.txt b/miditools/CMakeLists.txt
-index 6df79c4..f8145e0 100644
+index 6df79c4..e3bdb90 100644
 --- a/miditools/CMakeLists.txt
 +++ b/miditools/CMakeLists.txt
 @@ -13,7 +13,7 @@
@@ -210,7 +210,7 @@ index 6df79c4..f8145e0 100644
  
  set_target_properties(smf2xml
 -      PROPERTIES COMPILE_FLAGS "-g -Wall -Wextra"
-+      PROPERTIES COMPILE_FLAGS "-Wall -Wextra"
++      PROPERTIES COMPILE_FLAGS "-fPIC -Wall -Wextra"
        )
  target_link_libraries(smf2xml
        ${QT_LIBRARIES}
@@ -219,34 +219,41 @@ index 6df79c4..f8145e0 100644
  set_target_properties (
        xml2smf
 -      PROPERTIES COMPILE_FLAGS "-g -Wall -Wextra"
-+      PROPERTIES COMPILE_FLAGS "-Wall -Wextra"
++      PROPERTIES COMPILE_FLAGS "-fPIC -Wall -Wextra"
        )
  target_link_libraries(xml2smf
        ${QT_LIBRARIES}
 diff --git a/mscore/CMakeLists.txt b/mscore/CMakeLists.txt
-index d6663d6..8657a5e 100644
+index d6663d6..d74d6b1 100644
 --- a/mscore/CMakeLists.txt
 +++ b/mscore/CMakeLists.txt
-@@ -380,7 +380,7 @@ if (MINGW)
+@@ -380,13 +380,13 @@ if (MINGW)
     if(CMAKE_BUILD_TYPE MATCHES "DEBUG")
       set_target_properties( mscore
          PROPERTIES
 -           COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-+           COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
++           COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
             LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L ${CROSSQT}/lib"
          )
     else(CMAKE_BUILD_TYPE MATCHES "DEBUG")
+      set_target_properties( mscore
+           PROPERTIES
+-             COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
++             COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
+              LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -L ${CROSSQT}/lib"
+           )
+    endif(CMAKE_BUILD_TYPE MATCHES "DEBUG")
 @@ -506,7 +506,7 @@ else (MINGW)
     set_target_properties (
        mscore
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wno-overloaded-virtual -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wno-overloaded-virtual -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wno-overloaded-virtual -Winvalid-pch"
        )
  
     if (OMR)
 diff --git a/mstyle/CMakeLists.txt b/mstyle/CMakeLists.txt
-index e60d901..d3ba643 100644
+index e60d901..16a2678 100644
 --- a/mstyle/CMakeLists.txt
 +++ b/mstyle/CMakeLists.txt
 @@ -49,7 +49,7 @@ add_library (
@@ -254,12 +261,12 @@ index e60d901..d3ba643 100644
        mstyle
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(mstyle all)
 diff --git a/mtest/CMakeLists.txt b/mtest/CMakeLists.txt
-index ab76098..133611e 100644
+index ab76098..080c15b 100644
 --- a/mtest/CMakeLists.txt
 +++ b/mtest/CMakeLists.txt
 @@ -113,20 +113,10 @@ target_link_libraries(
@@ -280,7 +287,7 @@ index ab76098..133611e 100644
 -   endif (MINGW)
 -endif(APPLE)
 -
-+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fPIE -DNDEBUG -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -DNDEBUG -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT")
 +set(CMAKE_CXX_STANDARD 11)
 +set(CMAKE_CXX_STANDARD_REQUIRED ON)
 +set(CMAKE_CXX_EXTENSIONS ON)
@@ -292,19 +299,19 @@ index ab76098..133611e 100644
        testutils
        PROPERTIES
 -      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -g -Wall -Wextra"
-+      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -Wall -Wextra"
++      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -fPIC -Wall -Wextra"
        )
  else (APPLE AND (CMAKE_VERSION VERSION_LESS "3.5.0"))
  set_target_properties (
        testutils
        PROPERTIES
 -      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
-+      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -Wall -Wextra"
++      COMPILE_FLAGS "-include all.h -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -fPIC -Wall -Wextra"
        )
  endif (APPLE AND (CMAKE_VERSION VERSION_LESS "3.5.0"))
  
 -#      COMPILE_FLAGS "-include all.h -I ${INC} -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
-+#      COMPILE_FLAGS "-include all.h -I ${INC} -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -Wall -Wextra"
++#      COMPILE_FLAGS "-include all.h -I ${INC} -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -fPIC -Wall -Wextra"
  
  add_custom_target(report
        COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml -Droot.dir=${PROJECT_BINARY_DIR}/mtest report
@@ -343,7 +350,7 @@ index 943b85e..ff8f86a 100644
  endif (APPLE AND (CMAKE_VERSION VERSION_LESS "3.5.0"))
  
 diff --git a/omr/CMakeLists.txt b/omr/CMakeLists.txt
-index 9ad57b9..68f793e 100644
+index 9ad57b9..caf9a36 100644
 --- a/omr/CMakeLists.txt
 +++ b/omr/CMakeLists.txt
 @@ -42,7 +42,7 @@ add_library (
@@ -351,12 +358,12 @@ index 9ad57b9..68f793e 100644
        omr
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch -Wno-unused-private-field"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch -Wno-unused-private-field"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch -Wno-unused-private-field"
        )
  
  xcode_pch(omr all)
 diff --git a/synthesizer/CMakeLists.txt b/synthesizer/CMakeLists.txt
-index 0520920..e9bd15b 100644
+index 0520920..e0a1aa7 100644
 --- a/synthesizer/CMakeLists.txt
 +++ b/synthesizer/CMakeLists.txt
 @@ -29,7 +29,7 @@ add_library (synthesizer STATIC
@@ -364,12 +371,12 @@ index 0520920..e9bd15b 100644
        synthesizer
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(synthesizer all)
 diff --git a/thirdparty/beatroot/CMakeLists.txt b/thirdparty/beatroot/CMakeLists.txt
-index ae905c7..9b039e8 100644
+index ae905c7..f0fb50a 100644
 --- a/thirdparty/beatroot/CMakeLists.txt
 +++ b/thirdparty/beatroot/CMakeLists.txt
 @@ -14,7 +14,7 @@ add_library (
@@ -377,12 +384,12 @@ index ae905c7..9b039e8 100644
  set_target_properties( beatroot
     PROPERTIES
 -      COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+      COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++      COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
     )
  
  xcode_pch(beatroot all)
 diff --git a/thirdparty/diff/CMakeLists.txt b/thirdparty/diff/CMakeLists.txt
-index d0155b2..35bd6ac 100644
+index d0155b2..3985868 100644
 --- a/thirdparty/diff/CMakeLists.txt
 +++ b/thirdparty/diff/CMakeLists.txt
 @@ -36,7 +36,7 @@ add_library(diff_match_patch STATIC
@@ -390,12 +397,12 @@ index d0155b2..35bd6ac 100644
        diff_match_patch
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(diff_match_patch all)
 diff --git a/thirdparty/kQOAuth/CMakeLists.txt b/thirdparty/kQOAuth/CMakeLists.txt
-index 9beb6b1..f7ec1c5 100644
+index 9beb6b1..f452df5 100644
 --- a/thirdparty/kQOAuth/CMakeLists.txt
 +++ b/thirdparty/kQOAuth/CMakeLists.txt
 @@ -40,7 +40,7 @@ add_library(kqoauth STATIC
@@ -403,12 +410,12 @@ index 9beb6b1..f7ec1c5 100644
        kqoauth
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -I ${PROJECT_SOURCE_DIR}/thirdparty/openssl/include -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -I ${PROJECT_SOURCE_DIR}/thirdparty/openssl/include -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -I ${PROJECT_SOURCE_DIR}/thirdparty/openssl/include -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(kqoauth all)
 diff --git a/thirdparty/ofqf/CMakeLists.txt b/thirdparty/ofqf/CMakeLists.txt
-index fc39a0a..8c11f07 100644
+index fc39a0a..9200dd3 100644
 --- a/thirdparty/ofqf/CMakeLists.txt
 +++ b/thirdparty/ofqf/CMakeLists.txt
 @@ -36,7 +36,7 @@ add_library(ofqf STATIC
@@ -416,12 +423,32 @@ index fc39a0a..8c11f07 100644
        ofqf
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(ofqf all)
+diff --git a/thirdparty/poppler/CMakeLists.txt b/thirdparty/poppler/CMakeLists.txt
+index 943cca7..20f3360 100644
+--- a/thirdparty/poppler/CMakeLists.txt
++++ b/thirdparty/poppler/CMakeLists.txt
+@@ -134,12 +134,12 @@ add_library(poppler STATIC
+    )
+ 
+ if (APPLE)
+-   set ( POPPLER_COMPILE_FLAGS "-O2 -Wno-unknown-warning-option -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual -Wno-unused-private-field -Wno-return-stack-address -Wno-shift-negative-value -std=c++11")
++   set ( POPPLER_COMPILE_FLAGS "-O2 -fPIC -Wno-unknown-warning-option -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual -Wno-unused-private-field -Wno-return-stack-address -Wno-shift-negative-value -std=c++11")
+ else (APPLE)
+    if (MINGW)
+-      set (POPPLER_COMPILE_FLAGS "-O2 -Wall -Wextra -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual -Wno-unused-parameter -Wno-missing-field-initializers -Wno-unused-but-set-variable -Wno-format -std=c++11")
++      set (POPPLER_COMPILE_FLAGS "-O2 -fPIC -Wall -Wextra -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual -Wno-unused-parameter -Wno-missing-field-initializers -Wno-unused-but-set-variable -Wno-format -std=c++11")
+    else (MINGW)
+-      set (POPPLER_COMPILE_FLAGS "-O2 -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual -Wno-unused-parameter -Wno-missing-field-initializers -Wno-unused-but-set-variable -std=c++11")
++      set (POPPLER_COMPILE_FLAGS "-O2 -fPIC -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual -Wno-unused-parameter -Wno-missing-field-initializers -Wno-unused-but-set-variable -std=c++11")
+    endif(MINGW)
+ endif(APPLE)
+ 
 diff --git a/thirdparty/qzip/CMakeLists.txt b/thirdparty/qzip/CMakeLists.txt
-index 77b1997..417017e 100644
+index 77b1997..b1b4cb8 100644
 --- a/thirdparty/qzip/CMakeLists.txt
 +++ b/thirdparty/qzip/CMakeLists.txt
 @@ -29,7 +29,7 @@ add_library(qzip STATIC
@@ -429,12 +456,12 @@ index 77b1997..417017e 100644
        qzip
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(qzip all)
 diff --git a/thirdparty/rtf2html/CMakeLists.txt b/thirdparty/rtf2html/CMakeLists.txt
-index 230339b..6c94a06 100644
+index 230339b..c052605 100644
 --- a/thirdparty/rtf2html/CMakeLists.txt
 +++ b/thirdparty/rtf2html/CMakeLists.txt
 @@ -37,7 +37,7 @@ add_library (
@@ -442,12 +469,12 @@ index 230339b..6c94a06 100644
  set_target_properties( rtf2html
     PROPERTIES
 -      COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+      COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++      COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
     )
  
  xcode_pch(rtf2html all)
 diff --git a/thirdparty/singleapp/src/CMakeLists.txt b/thirdparty/singleapp/src/CMakeLists.txt
-index 2504b01..936fa3f 100644
+index 2504b01..722e5d5 100644
 --- a/thirdparty/singleapp/src/CMakeLists.txt
 +++ b/thirdparty/singleapp/src/CMakeLists.txt
 @@ -31,7 +31,7 @@ add_library (
@@ -455,12 +482,12 @@ index 2504b01..936fa3f 100644
    qtsingleapp
    PROPERTIES
 -  COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+  COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++  COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
    )
  
  xcode_pch(qtsingleapp all)
 diff --git a/thirdparty/xmlstream/CMakeLists.txt b/thirdparty/xmlstream/CMakeLists.txt
-index 5991e09..7f1268e 100644
+index 5991e09..7e6db93 100644
 --- a/thirdparty/xmlstream/CMakeLists.txt
 +++ b/thirdparty/xmlstream/CMakeLists.txt
 @@ -29,7 +29,7 @@ add_library(xmlstream STATIC
@@ -468,12 +495,12 @@ index 5991e09..7f1268e 100644
        xmlstream
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(xmlstream all)
 diff --git a/zerberus/CMakeLists.txt b/zerberus/CMakeLists.txt
-index c0db571..58d8ddf 100644
+index c0db571..52090bd 100644
 --- a/zerberus/CMakeLists.txt
 +++ b/zerberus/CMakeLists.txt
 @@ -31,7 +31,7 @@ add_library (zerberus STATIC
@@ -481,7 +508,7 @@ index c0db571..58d8ddf 100644
        zerberus
        PROPERTIES
 -         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch"
++         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch"
        )
  
  xcode_pch(zerberus all)
