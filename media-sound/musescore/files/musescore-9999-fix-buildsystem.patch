@@ -316,7 +316,7 @@ index ab76098..080c15b 100644
  add_custom_target(report
        COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml -Droot.dir=${PROJECT_BINARY_DIR}/mtest report
 diff --git a/mtest/cmake.inc b/mtest/cmake.inc
-index 943b85e..ff8f86a 100644
+index 943b85e..35b04f5 100644
 --- a/mtest/cmake.inc
 +++ b/mtest/cmake.inc
 @@ -60,16 +60,16 @@ set_target_properties (
@@ -325,7 +325,7 @@ index 943b85e..ff8f86a 100644
        AUTOMOC true
 -      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
 -      LINK_FLAGS    "-g -stdlib=libc++"
-+      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -Wall -Wextra"
++      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -fPIC -Wall -Wextra"
 +      LINK_FLAGS    "-stdlib=libc++"
        )
  else(APPLE)
@@ -335,7 +335,7 @@ index 943b85e..ff8f86a 100644
        AUTOMOC true
 -      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -g -Wall -Wextra"
 -      LINK_FLAGS    "-g"
-+      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -Wall -Wextra"
++      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\"${PROJECT_SOURCE_DIR}\\\" -fPIC -Wall -Wextra"
 +      LINK_FLAGS    ""
        )
  endif(APPLE)
@@ -345,7 +345,7 @@ index 943b85e..ff8f86a 100644
        ${TARGET}
        PROPERTIES
 -      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -g -Wall -Wextra"
-+      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -Wall -Wextra"
++      COMPILE_FLAGS "-include all.h -D QT_GUI_LIB -D TESTROOT=\\\\\"${PROJECT_SOURCE_DIR}\\\\\" -fPIC -Wall -Wextra"
        )
  endif (APPLE AND (CMAKE_VERSION VERSION_LESS "3.5.0"))
  
