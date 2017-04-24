@@ -1,0 +1,95 @@
+From 882add136fa8319832ef373b8797ef58edb80efc Mon Sep 17 00:00:00 2001
+From: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date: Thu, 13 Apr 2017 21:21:58 +0200
+Subject: [PATCH] difftool: fix use-after-free
+
+The left and right base directories were pointed to the buf field of
+two strbufs, which were subject to change.
+
+A contrived test case shows the problem where a file with a long enough
+name to force the strbuf to grow is up-to-date (hence the code path is
+used where the work tree's version of the file is reused), and then a
+file that is not up-to-date needs to be written (hence the code path is
+used where checkout_entry() uses the previously recorded base_dir that
+is invalid by now).
+
+Let's just copy the base_dir strings for use with checkout_entry(),
+never touch them until the end, and release them then. This is an easily
+verifiable fix (as opposed to the next-obvious alternative: to re-set
+base_dir after every loop iteration).
+
+This fixes https://github.com/git-for-windows/git/issues/1124
+
+Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+Reviewed-by: Jonathan Nieder <jrnieder@gmail.com>
+Signed-off-by: Junio C Hamano <gitster@pobox.com>
+---
+ builtin/difftool.c  |  7 +++++--
+ t/t7800-difftool.sh | 19 +++++++++++++++++++
+ 2 files changed, 24 insertions(+), 2 deletions(-)
+
+diff --git a/builtin/difftool.c b/builtin/difftool.c
+index b350b3d..1354d0e 100644
+--- a/builtin/difftool.c
++++ b/builtin/difftool.c
+@@ -318,6 +318,7 @@ static int run_dir_diff(const char *extcmd, int symlinks, const char *prefix,
+ 	struct strbuf rpath = STRBUF_INIT, buf = STRBUF_INIT;
+ 	struct strbuf ldir = STRBUF_INIT, rdir = STRBUF_INIT;
+ 	struct strbuf wtdir = STRBUF_INIT;
++	char *lbase_dir, *rbase_dir;
+ 	size_t ldir_len, rdir_len, wtdir_len;
+ 	const char *workdir, *tmp;
+ 	int ret = 0, i;
+@@ -351,11 +352,11 @@ static int run_dir_diff(const char *extcmd, int symlinks, const char *prefix,
+ 	memset(&wtindex, 0, sizeof(wtindex));
+ 
+ 	memset(&lstate, 0, sizeof(lstate));
+-	lstate.base_dir = ldir.buf;
++	lstate.base_dir = lbase_dir = xstrdup(ldir.buf);
+ 	lstate.base_dir_len = ldir.len;
+ 	lstate.force = 1;
+ 	memset(&rstate, 0, sizeof(rstate));
+-	rstate.base_dir = rdir.buf;
++	rstate.base_dir = rbase_dir = xstrdup(rdir.buf);
+ 	rstate.base_dir_len = rdir.len;
+ 	rstate.force = 1;
+ 
+@@ -625,6 +626,8 @@ static int run_dir_diff(const char *extcmd, int symlinks, const char *prefix,
+ 		exit_cleanup(tmpdir, rc);
+ 
+ finish:
++	free(lbase_dir);
++	free(rbase_dir);
+ 	strbuf_release(&ldir);
+ 	strbuf_release(&rdir);
+ 	strbuf_release(&wtdir);
+diff --git a/t/t7800-difftool.sh b/t/t7800-difftool.sh
+index 0e7f30d..7f09867 100755
+--- a/t/t7800-difftool.sh
++++ b/t/t7800-difftool.sh
+@@ -393,6 +393,25 @@ test_expect_success 'setup change in subdirectory' '
+ 	git commit -m "modified both"
+ '
+ 
++test_expect_success 'difftool -d with growing paths' '
++	a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa &&
++	git init growing &&
++	(
++		cd growing &&
++		echo "test -f \"\$2/b\"" | write_script .git/test-for-b.sh &&
++		one=$(printf 1 | git hash-object -w --stdin) &&
++		two=$(printf 2 | git hash-object -w --stdin) &&
++		git update-index --add \
++			--cacheinfo 100644,$one,$a --cacheinfo 100644,$two,b &&
++		tree1=$(git write-tree) &&
++		git update-index --add \
++			--cacheinfo 100644,$two,$a --cacheinfo 100644,$one,b &&
++		tree2=$(git write-tree) &&
++		git checkout -- $a &&
++		git difftool -d --extcmd .git/test-for-b.sh $tree1 $tree2
++	)
++'
++
+ run_dir_diff_test () {
+ 	test_expect_success "$1 --no-symlinks" "
+ 		symlinks=--no-symlinks &&
