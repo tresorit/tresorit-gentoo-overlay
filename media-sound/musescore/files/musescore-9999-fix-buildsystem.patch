@@ -167,6 +167,19 @@ index b4f5aa629..afcb1f560 100644
        )
  
  xcode_pch(libmscore all)
+diff --git a/libmscore/mscore.cpp b/libmscore/mscore.cpp
+index 070ff56fc..afcb7314d 100644
+--- a/libmscore/mscore.cpp
++++ b/libmscore/mscore.cpp
+@@ -414,7 +414,7 @@ QQmlEngine* MScore::qml()
+             qmlRegisterType<MsProcess>  ("MuseScore", 1, 0, "QProcess");
+             qmlRegisterType<FileIO, 1>  ("FileIO",    1, 0, "FileIO");
+             //-----------mscore bindings
+-            qmlRegisterUncreatableMetaObject(Ms::staticMetaObject, "MuseScore", 1, 0, "Ms", enumErr);
++            // qmlRegisterUncreatableMetaObject(Ms::staticMetaObject, "MuseScore", 1, 0, "Ms", enumErr);
+             qmlRegisterUncreatableType<Direction>("MuseScore", 1, 0, "Direction", tr(enumErr));
+ 
+             qmlRegisterType<MScore>     ("MuseScore", 1, 0, "MScore");
 diff --git a/libmscore/scoreElement.h b/libmscore/scoreElement.h
 index dd6f6e7a8..ff97b6e4a 100644
 --- a/libmscore/scoreElement.h
