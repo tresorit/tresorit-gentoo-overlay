@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index bf6e324..8f48e61 100644
+index d834eedea..6bbdf2b4f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -104,7 +104,7 @@ option(BUILD_PULSEAUDIO "Build with support for PulseAudio audio backend." ON)
@@ -8,10 +8,10 @@ index bf6e324..8f48e61 100644
  option(BUILD_PORTMIDI "Build with support for PortAudio's MIDI features." ${BUILD_PORTAUDIO}) # PortAudio required
 -option(BUILD_PCH "Build using precompiled headers." ON)
 +option(BUILD_PCH "Build using precompiled headers." OFF)
+ option(BUILD_FOR_WINSTORE "Build for the Windows Store." OFF)
  
  if (APPLE)
-       set (CMAKE_CXX_COMPILER   clang++)
-@@ -143,27 +143,13 @@ if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
+@@ -144,27 +144,13 @@ if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
        endif()
  endif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
  
@@ -44,7 +44,7 @@ index bf6e324..8f48e61 100644
  set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
  
  # The MuseScore version number.
-@@ -435,7 +421,6 @@ if (NOT MINGW AND NOT APPLE)
+@@ -440,7 +426,6 @@ if (NOT MINGW AND NOT APPLE)
      #     set library search path for runtime linker to load the same
      #     qt libraries as we used at compile time
      #
@@ -53,7 +53,7 @@ index bf6e324..8f48e61 100644
      if (${MSCORE_INSTALL_SUFFIX} MATCHES "portable") # Note: "-portable-anything" would match
        # Build portable AppImage as per https://github.com/probonopd/AppImageKit
 diff --git a/aeolus/CMakeLists.txt b/aeolus/CMakeLists.txt
-index 7962e87..bdcb08d 100644
+index 7962e8781..bdcb08dae 100644
 --- a/aeolus/CMakeLists.txt
 +++ b/aeolus/CMakeLists.txt
 @@ -43,7 +43,7 @@ add_library (aeolus STATIC
@@ -66,7 +66,7 @@ index 7962e87..bdcb08d 100644
  
  install(DIRECTORY
 diff --git a/audiofile/CMakeLists.txt b/audiofile/CMakeLists.txt
-index 5b1dd48..264a14a 100644
+index 5b1dd48ee..264a14a17 100644
 --- a/audiofile/CMakeLists.txt
 +++ b/audiofile/CMakeLists.txt
 @@ -26,7 +26,7 @@ add_library (audiofile STATIC
@@ -79,7 +79,7 @@ index 5b1dd48..264a14a 100644
  
  xcode_pch(audiofile all)
 diff --git a/awl/CMakeLists.txt b/awl/CMakeLists.txt
-index bcf5427..fec81d8 100644
+index bcf5427b7..fec81d8b3 100644
 --- a/awl/CMakeLists.txt
 +++ b/awl/CMakeLists.txt
 @@ -43,7 +43,7 @@ add_library (
@@ -92,7 +92,7 @@ index bcf5427..fec81d8 100644
  
  xcode_pch(awl all)
 diff --git a/build/CreatePrecompiledHeader.cmake b/build/CreatePrecompiledHeader.cmake
-index 72faba0..8f9d263 100644
+index 72faba0de..8f9d2636c 100644
 --- a/build/CreatePrecompiledHeader.cmake
 +++ b/build/CreatePrecompiledHeader.cmake
 @@ -36,7 +36,7 @@ macro( precompiled_header includes header_name build_pch)
@@ -105,7 +105,7 @@ index 72faba0..8f9d263 100644
               WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
               VERBATIM
 diff --git a/bww2mxml/CMakeLists.txt b/bww2mxml/CMakeLists.txt
-index d6b7794..ad78153 100644
+index d6b779465..ad7815358 100644
 --- a/bww2mxml/CMakeLists.txt
 +++ b/bww2mxml/CMakeLists.txt
 @@ -49,7 +49,7 @@ if (NOT MINGW AND NOT APPLE)
@@ -118,7 +118,7 @@ index d6b7794..ad78153 100644
  
     target_link_libraries(bww2mxml
 diff --git a/effects/CMakeLists.txt b/effects/CMakeLists.txt
-index a695f1d..1f34faf 100644
+index a695f1d5e..1f34fafce 100644
 --- a/effects/CMakeLists.txt
 +++ b/effects/CMakeLists.txt
 @@ -44,7 +44,7 @@ add_library (effects STATIC
@@ -131,7 +131,7 @@ index a695f1d..1f34faf 100644
  
  xcode_pch(effects all)
 diff --git a/fluid/CMakeLists.txt b/fluid/CMakeLists.txt
-index 1dc8d2f..99f8f57 100644
+index 1dc8d2f8d..99f8f574e 100644
 --- a/fluid/CMakeLists.txt
 +++ b/fluid/CMakeLists.txt
 @@ -45,7 +45,7 @@ add_library (fluid STATIC
@@ -144,7 +144,7 @@ index 1dc8d2f..99f8f57 100644
  
  xcode_pch(fluid all)
 diff --git a/fonttools/CMakeLists.txt b/fonttools/CMakeLists.txt
-index 74a525b..2cc0084 100644
+index 74a525ba3..2cc008495 100644
 --- a/fonttools/CMakeLists.txt
 +++ b/fonttools/CMakeLists.txt
 @@ -19,5 +19,5 @@ add_executable(
@@ -155,7 +155,7 @@ index 74a525b..2cc0084 100644
 +set_target_properties(genft PROPERTIES COMPILE_FLAGS "-I/usr/include/freetype2 -fPIC -Wall -Wextra -Winvalid-pch")
  
 diff --git a/libmscore/CMakeLists.txt b/libmscore/CMakeLists.txt
-index b4f5aa6..afcb1f5 100644
+index b4f5aa629..afcb1f560 100644
 --- a/libmscore/CMakeLists.txt
 +++ b/libmscore/CMakeLists.txt
 @@ -76,7 +76,7 @@ add_library (
@@ -168,7 +168,7 @@ index b4f5aa6..afcb1f5 100644
  
  xcode_pch(libmscore all)
 diff --git a/manual/CMakeLists.txt b/manual/CMakeLists.txt
-index cf6edca..9eb8492 100644
+index cf6edcaed..9eb84926c 100644
 --- a/manual/CMakeLists.txt
 +++ b/manual/CMakeLists.txt
 @@ -36,13 +36,13 @@ if(APPLE)
@@ -188,7 +188,7 @@ index cf6edca..9eb8492 100644
  endif(APPLE)
  
 diff --git a/midi/CMakeLists.txt b/midi/CMakeLists.txt
-index 05fbb83..bf79c9e 100644
+index 05fbb83d5..bf79c9e3f 100644
 --- a/midi/CMakeLists.txt
 +++ b/midi/CMakeLists.txt
 @@ -27,7 +27,7 @@ add_library (midi STATIC
@@ -201,7 +201,7 @@ index 05fbb83..bf79c9e 100644
  
  xcode_pch(midi all)
 diff --git a/miditools/CMakeLists.txt b/miditools/CMakeLists.txt
-index 6df79c4..e3bdb90 100644
+index 6df79c41b..e3bdb90b8 100644
 --- a/miditools/CMakeLists.txt
 +++ b/miditools/CMakeLists.txt
 @@ -13,7 +13,7 @@
@@ -223,26 +223,26 @@ index 6df79c4..e3bdb90 100644
  target_link_libraries(xml2smf
        ${QT_LIBRARIES}
 diff --git a/mscore/CMakeLists.txt b/mscore/CMakeLists.txt
-index dc99a25..832959d 100644
+index 2f3316cd5..08bef1d51 100644
 --- a/mscore/CMakeLists.txt
 +++ b/mscore/CMakeLists.txt
-@@ -430,13 +430,13 @@ if (MINGW)
+@@ -432,13 +432,13 @@ if (MINGW)
     if(CMAKE_BUILD_TYPE MATCHES "DEBUG")
       set_target_properties( mscore
          PROPERTIES
 -           COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
 +           COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-            LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L ${CROSSQT}/lib"
+            LINK_FLAGS "-mwindows -mconsole -L ${CROSSQT}/lib"
          )
     else(CMAKE_BUILD_TYPE MATCHES "DEBUG")
       set_target_properties( mscore
            PROPERTIES
 -             COMPILE_FLAGS "${PCH_INCLUDE} -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
 +             COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-              LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -L ${CROSSQT}/lib"
+              LINK_FLAGS "-Wl,-S -mwindows -L ${CROSSQT}/lib"
            )
     endif(CMAKE_BUILD_TYPE MATCHES "DEBUG")
-@@ -562,7 +562,7 @@ else (MINGW)
+@@ -564,7 +564,7 @@ else (MINGW)
     set_target_properties (
        mscore
        PROPERTIES
@@ -252,7 +252,7 @@ index dc99a25..832959d 100644
  
     if (OMR)
 diff --git a/mstyle/CMakeLists.txt b/mstyle/CMakeLists.txt
-index 2bc43c4..3fb96fc 100644
+index 2bc43c4bd..3fb96fcfa 100644
 --- a/mstyle/CMakeLists.txt
 +++ b/mstyle/CMakeLists.txt
 @@ -49,7 +49,7 @@ add_library (
@@ -265,7 +265,7 @@ index 2bc43c4..3fb96fc 100644
  
  xcode_pch(mstyle all)
 diff --git a/mtest/CMakeLists.txt b/mtest/CMakeLists.txt
-index 53bfbbb..cdb441c 100644
+index 53bfbbb5b..cdb441c9c 100644
 --- a/mtest/CMakeLists.txt
 +++ b/mtest/CMakeLists.txt
 @@ -112,20 +112,10 @@ target_link_libraries(
@@ -315,7 +315,7 @@ index 53bfbbb..cdb441c 100644
  add_custom_target(report
        COMMAND ant -f ${PROJECT_SOURCE_DIR}/mtest/build.xml -Droot.dir=${PROJECT_BINARY_DIR}/mtest report
 diff --git a/mtest/cmake.inc b/mtest/cmake.inc
-index 943b85e..35b04f5 100644
+index 943b85e5f..35b04f51e 100644
 --- a/mtest/cmake.inc
 +++ b/mtest/cmake.inc
 @@ -60,16 +60,16 @@ set_target_properties (
@@ -349,7 +349,7 @@ index 943b85e..35b04f5 100644
  endif (APPLE AND (CMAKE_VERSION VERSION_LESS "3.5.0"))
  
 diff --git a/omr/CMakeLists.txt b/omr/CMakeLists.txt
-index 9ad57b9..caf9a36 100644
+index 9ad57b930..caf9a3624 100644
 --- a/omr/CMakeLists.txt
 +++ b/omr/CMakeLists.txt
 @@ -42,7 +42,7 @@ add_library (
@@ -362,7 +362,7 @@ index 9ad57b9..caf9a36 100644
  
  xcode_pch(omr all)
 diff --git a/synthesizer/CMakeLists.txt b/synthesizer/CMakeLists.txt
-index 0520920..e0a1aa7 100644
+index 0520920cf..e0a1aa7a1 100644
 --- a/synthesizer/CMakeLists.txt
 +++ b/synthesizer/CMakeLists.txt
 @@ -29,7 +29,7 @@ add_library (synthesizer STATIC
@@ -375,7 +375,7 @@ index 0520920..e0a1aa7 100644
  
  xcode_pch(synthesizer all)
 diff --git a/thirdparty/beatroot/CMakeLists.txt b/thirdparty/beatroot/CMakeLists.txt
-index ae905c7..f0fb50a 100644
+index ae905c735..f0fb50a40 100644
 --- a/thirdparty/beatroot/CMakeLists.txt
 +++ b/thirdparty/beatroot/CMakeLists.txt
 @@ -14,7 +14,7 @@ add_library (
@@ -388,7 +388,7 @@ index ae905c7..f0fb50a 100644
  
  xcode_pch(beatroot all)
 diff --git a/thirdparty/diff/CMakeLists.txt b/thirdparty/diff/CMakeLists.txt
-index d0155b2..3985868 100644
+index d0155b214..3985868bb 100644
 --- a/thirdparty/diff/CMakeLists.txt
 +++ b/thirdparty/diff/CMakeLists.txt
 @@ -36,7 +36,7 @@ add_library(diff_match_patch STATIC
@@ -401,7 +401,7 @@ index d0155b2..3985868 100644
  
  xcode_pch(diff_match_patch all)
 diff --git a/thirdparty/kQOAuth/CMakeLists.txt b/thirdparty/kQOAuth/CMakeLists.txt
-index 9beb6b1..f452df5 100644
+index 9beb6b1f2..f452df5de 100644
 --- a/thirdparty/kQOAuth/CMakeLists.txt
 +++ b/thirdparty/kQOAuth/CMakeLists.txt
 @@ -40,7 +40,7 @@ add_library(kqoauth STATIC
@@ -414,7 +414,7 @@ index 9beb6b1..f452df5 100644
  
  xcode_pch(kqoauth all)
 diff --git a/thirdparty/ofqf/CMakeLists.txt b/thirdparty/ofqf/CMakeLists.txt
-index fc39a0a..9200dd3 100644
+index fc39a0aa1..9200dd312 100644
 --- a/thirdparty/ofqf/CMakeLists.txt
 +++ b/thirdparty/ofqf/CMakeLists.txt
 @@ -36,7 +36,7 @@ add_library(ofqf STATIC
@@ -427,7 +427,7 @@ index fc39a0a..9200dd3 100644
  
  xcode_pch(ofqf all)
 diff --git a/thirdparty/poppler/CMakeLists.txt b/thirdparty/poppler/CMakeLists.txt
-index 943cca7..20f3360 100644
+index 943cca72e..20f336087 100644
 --- a/thirdparty/poppler/CMakeLists.txt
 +++ b/thirdparty/poppler/CMakeLists.txt
 @@ -134,12 +134,12 @@ add_library(poppler STATIC
@@ -447,7 +447,7 @@ index 943cca7..20f3360 100644
  endif(APPLE)
  
 diff --git a/thirdparty/qzip/CMakeLists.txt b/thirdparty/qzip/CMakeLists.txt
-index 77b1997..b1b4cb8 100644
+index 77b19979e..b1b4cb841 100644
 --- a/thirdparty/qzip/CMakeLists.txt
 +++ b/thirdparty/qzip/CMakeLists.txt
 @@ -29,7 +29,7 @@ add_library(qzip STATIC
@@ -460,7 +460,7 @@ index 77b1997..b1b4cb8 100644
  
  xcode_pch(qzip all)
 diff --git a/thirdparty/rtf2html/CMakeLists.txt b/thirdparty/rtf2html/CMakeLists.txt
-index 230339b..c052605 100644
+index 230339bde..c052605e2 100644
 --- a/thirdparty/rtf2html/CMakeLists.txt
 +++ b/thirdparty/rtf2html/CMakeLists.txt
 @@ -37,7 +37,7 @@ add_library (
@@ -473,7 +473,7 @@ index 230339b..c052605 100644
  
  xcode_pch(rtf2html all)
 diff --git a/thirdparty/singleapp/src/CMakeLists.txt b/thirdparty/singleapp/src/CMakeLists.txt
-index 2504b01..722e5d5 100644
+index 2504b017e..722e5d553 100644
 --- a/thirdparty/singleapp/src/CMakeLists.txt
 +++ b/thirdparty/singleapp/src/CMakeLists.txt
 @@ -31,7 +31,7 @@ add_library (
@@ -486,7 +486,7 @@ index 2504b01..722e5d5 100644
  
  xcode_pch(qtsingleapp all)
 diff --git a/thirdparty/xmlstream/CMakeLists.txt b/thirdparty/xmlstream/CMakeLists.txt
-index 5991e09..7e6db93 100644
+index 5991e09e5..7e6db93ed 100644
 --- a/thirdparty/xmlstream/CMakeLists.txt
 +++ b/thirdparty/xmlstream/CMakeLists.txt
 @@ -29,7 +29,7 @@ add_library(xmlstream STATIC
@@ -499,7 +499,7 @@ index 5991e09..7e6db93 100644
  
  xcode_pch(xmlstream all)
 diff --git a/zerberus/CMakeLists.txt b/zerberus/CMakeLists.txt
-index c0db571..52090bd 100644
+index c0db57150..52090bd57 100644
 --- a/zerberus/CMakeLists.txt
 +++ b/zerberus/CMakeLists.txt
 @@ -31,7 +31,7 @@ add_library (zerberus STATIC
