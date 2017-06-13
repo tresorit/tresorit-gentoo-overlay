@@ -167,6 +167,28 @@ index b4f5aa629..afcb1f560 100644
        )
  
  xcode_pch(libmscore all)
+diff --git a/libmscore/scoreElement.h b/libmscore/scoreElement.h
+index dd6f6e7a8..ff97b6e4a 100644
+--- a/libmscore/scoreElement.h
++++ b/libmscore/scoreElement.h
+@@ -14,7 +14,7 @@
+ #define __SCORE_ELEMENT_H__
+ 
+ namespace Ms {
+-Q_NAMESPACE
++// Q_NAMESPACE
+ 
+ class ScoreElement;
+ class MasterScore;
+@@ -241,7 +241,7 @@ enum class ElementType {
+       MAXTYPE
+       };
+ 
+-Q_ENUM_NS(ElementType)
++// Q_ENUM_NS(ElementType)
+ 
+ //---------------------------------------------------------
+ //   ElementName
 diff --git a/manual/CMakeLists.txt b/manual/CMakeLists.txt
 index cf6edcaed..9eb84926c 100644
 --- a/manual/CMakeLists.txt
