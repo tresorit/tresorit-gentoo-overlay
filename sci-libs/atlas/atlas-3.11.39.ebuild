@@ -47,6 +47,11 @@ pkg_setup() {
 	linux-info_pkg_setup
 }
 
+src_prepare() {
+	epatch \
+		"${FILESDIR}"/${P}-dolastcomp.patch
+}
+
 src_configure() {
 	# hack needed to trick the flaky gcc detection
 	local mycc="$(type -P $(tc-getCC))"
