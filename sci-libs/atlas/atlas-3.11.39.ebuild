@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 FORTRAN_NEEDED=fortran
 
@@ -17,13 +17,17 @@ SRC_URI="mirror://sourceforge/math-atlas/${PN}${PV}.tar.bz2
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
-IUSE="+deprecated doc fortran generic ifko lapack static-libs threads cripple"
+IUSE="+deprecated doc +fortran generic ifko +lapack static-libs threads cripple"
 
 REQUIRED_USE="
 	deprecated? ( lapack )
 	lapack? ( fortran )"
 
 S="${WORKDIR}/ATLAS"
+
+PATCHES=(
+	"${FILESDIR}"/${P}-dolastcomp.patch
+)
 
 pkg_setup() {
 	local _cpufreq
@@ -45,11 +49,6 @@ pkg_setup() {
 	ERROR_KERNEL_X86_P4_CLOCKMOD="P4 Clockmod frequency scaling influences tuning and needs to be disabled at compile time."
 	ERROR_KERNEL_X86_INTEL_PSTATE="Intel Pstate frequency scaling influences tuning and needs to be disabled at compile time."
 	linux-info_pkg_setup
-}
-
-src_prepare() {
-	epatch \
-		"${FILESDIR}"/${P}-dolastcomp.patch
 }
 
 src_configure() {
