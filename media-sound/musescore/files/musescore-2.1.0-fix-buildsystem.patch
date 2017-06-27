@@ -222,7 +222,7 @@ index 6df79c41b..f8145e04a 100644
  target_link_libraries(xml2smf
        ${QT_LIBRARIES}
 diff --git a/mscore/CMakeLists.txt b/mscore/CMakeLists.txt
-index 36196e1c8..0af001763 100644
+index 36196e1c8..cb4a889cd 100644
 --- a/mscore/CMakeLists.txt
 +++ b/mscore/CMakeLists.txt
 @@ -379,7 +379,7 @@ if (MINGW)
@@ -234,6 +234,15 @@ index 36196e1c8..0af001763 100644
                    LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L ${CROSSQT}/lib"
                    )
        else (CMAKE_BUILD_TYPE MATCHES "DEBUG")
+@@ -507,7 +507,7 @@ else (MINGW)
+         if (APPLE)
+             set(PORTMIDI_LIB portmidi)
+         else (APPLE)
+-            set(PORTMIDI_LIB -lportmidi -lporttime) # Remove -lporttime on RPM-based systems where PortTime is part of PortMidi.
++            set(PORTMIDI_LIB -lportmidi) # -lporttime) # Remove -lporttime on RPM-based systems where PortTime is part of PortMidi.
+         endif (APPLE)
+         target_link_libraries(mscore ${PORTMIDI_LIB})
+     endif (USE_PORTMIDI)
 @@ -526,7 +526,7 @@ else (MINGW)
  
        set_target_properties(mscore
