@@ -29,7 +29,7 @@ src_compile() {
 		HELPER_PATH="/usr/$(get_libdir)/afl" \
 		DOC_PATH="/usr/share/doc/${PF}"
 	CC="clang" CXX="clang++" strip-unsupported-flags
-	cd llvm_mode
+	cd llvm_mode || die
 	emake \
 		PREFIX="/usr" \
 		HELPER_PATH="/usr/$(get_libdir)/afl" \
