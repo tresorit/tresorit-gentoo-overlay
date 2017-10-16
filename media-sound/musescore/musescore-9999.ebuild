@@ -3,10 +3,10 @@
 
 EAPI=6
 
-inherit cmake-utils git-r3
+inherit cmake-utils
 
 DESCRIPTION="WYSIWYG Music Score Typesetter"
-HOMEPAGE="http://musescore.org/"
+HOMEPAGE="https://musescore.org/"
 
 if [[ ${PV} = 9999 ]]; then
 	inherit git-r3
@@ -15,6 +15,7 @@ if [[ ${PV} = 9999 ]]; then
 else
 	SRC_URI="https://github.com/${PN}/MuseScore/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
+	S="${WORKDIR}/MuseScore-${PV}"
 fi
 
 LICENSE="GPL-2"
