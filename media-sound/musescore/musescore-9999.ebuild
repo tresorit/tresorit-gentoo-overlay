@@ -13,8 +13,7 @@ EGIT_REPO_URI="git://github.com/musescore/MuseScore.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="alsa debug jack mp3 portaudio portmidi pulseaudio"
-REQUIRED_USE="portmidi? ( portaudio )"
+IUSE="alsa debug jack mp3 portaudio pulseaudio"
 
 RDEPEND="
 	dev-qt/designer:5
@@ -34,8 +33,7 @@ RDEPEND="
 	alsa? ( >=media-libs/alsa-lib-1.0.0 )
 	jack? ( media-sound/jack-audio-connection-kit )
 	mp3? ( media-sound/lame )
-	portaudio? ( media-libs/portaudio )
-	portmidi? ( media-libs/portmidi )
+	portaudio? ( media-libs/portaudio media-libs/portmidi )
 	pulseaudio? ( media-sound/pulseaudio )
 	"
 DEPEND="${RDEPEND}
@@ -52,7 +50,7 @@ src_configure() {
 		-DBUILD_JACK="$(usex jack)"
 		-DBUILD_LAME="$(usex mp3)"
 		-DBUILD_PORTAUDIO="$(usex portaudio)"
-		-DBUILD_PORTMIDI="$(usex portmidi)"
+		-DBUILD_PORTMIDI="$(usex portaudio)"
 		-DBUILD_PULSEAUDIO="$(usex pulseaudio)"
 	)
 	cmake-utils_src_configure

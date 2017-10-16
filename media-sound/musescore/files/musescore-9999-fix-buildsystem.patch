@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d834eedea..6bbdf2b4f 100644
+index 883297269..63f956dd7 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -104,7 +104,7 @@ option(BUILD_PULSEAUDIO "Build with support for PulseAudio audio backend." ON)
@@ -92,7 +92,7 @@ index bcf5427b7..fec81d8b3 100644
  
  xcode_pch(awl all)
 diff --git a/build/CreatePrecompiledHeader.cmake b/build/CreatePrecompiledHeader.cmake
-index 72faba0de..8f9d2636c 100644
+index e303526ce..7740bea9c 100644
 --- a/build/CreatePrecompiledHeader.cmake
 +++ b/build/CreatePrecompiledHeader.cmake
 @@ -36,7 +36,7 @@ macro( precompiled_header includes header_name build_pch)
@@ -167,50 +167,6 @@ index 24399cb89..f09095d18 100644
        )
  
  xcode_pch(libmscore all)
-diff --git a/libmscore/mscore.cpp b/libmscore/mscore.cpp
-index 4d744cefd..6b903f388 100644
---- a/libmscore/mscore.cpp
-+++ b/libmscore/mscore.cpp
-@@ -423,7 +423,7 @@ QQmlEngine* MScore::qml()
-             qmlRegisterType<MsProcess>  ("MuseScore", 1, 0, "QProcess");
-             qmlRegisterType<FileIO, 1>  ("FileIO",    1, 0, "FileIO");
-             //-----------mscore bindings
--            qmlRegisterUncreatableMetaObject(Ms::staticMetaObject, "MuseScore", 1, 0, "Ms", enumErr);
-+//            qmlRegisterUncreatableMetaObject(Ms::staticMetaObject, "MuseScore", 1, 0, "Ms", enumErr);
- //            qmlRegisterUncreatableType<Direction>("MuseScore", 1, 0, "Direction", tr(enumErr));
- 
-             qmlRegisterType<MScore>     ("MuseScore", 1, 0, "MScore");
-diff --git a/libmscore/types.h b/libmscore/types.h
-index b8e39e179..03b20d77c 100644
---- a/libmscore/types.h
-+++ b/libmscore/types.h
-@@ -14,7 +14,7 @@
- #define __TYPES_H__
- 
- namespace Ms {
--Q_NAMESPACE
-+// Q_NAMESPACE
- 
- //-------------------------------------------------------------------
- //    The value of this enum determines the "stacking order"
-@@ -125,7 +125,7 @@ enum class ElementType {
-       MAXTYPE
-       };
- 
--Q_ENUM_NS(ElementType)
-+// Q_ENUM_NS(ElementType)
- 
- //---------------------------------------------------------
- //   Direction
-@@ -135,7 +135,7 @@ enum class Direction {
-       AUTO, UP, DOWN
-       };
- 
--Q_ENUM_NS(Direction)
-+// Q_ENUM_NS(Direction)
- 
- //hack: to force the build system to run moc on this file
- class Mops : public QObject {
 diff --git a/manual/CMakeLists.txt b/manual/CMakeLists.txt
 index cf6edcaed..9eb84926c 100644
 --- a/manual/CMakeLists.txt
@@ -267,10 +223,10 @@ index 6df79c41b..e3bdb90b8 100644
  target_link_libraries(xml2smf
        ${QT_LIBRARIES}
 diff --git a/mscore/CMakeLists.txt b/mscore/CMakeLists.txt
-index 2f3316cd5..c0c44404b 100644
+index 797cbb92f..364f59f69 100644
 --- a/mscore/CMakeLists.txt
 +++ b/mscore/CMakeLists.txt
-@@ -432,13 +432,13 @@ if (MINGW)
+@@ -433,13 +433,13 @@ if (MINGW)
     if(CMAKE_BUILD_TYPE MATCHES "DEBUG")
       set_target_properties( mscore
          PROPERTIES
@@ -286,7 +242,7 @@ index 2f3316cd5..c0c44404b 100644
               LINK_FLAGS "-Wl,-S -mwindows -L ${CROSSQT}/lib"
            )
     endif(CMAKE_BUILD_TYPE MATCHES "DEBUG")
-@@ -552,7 +552,7 @@ else (MINGW)
+@@ -553,7 +553,7 @@ else (MINGW)
          if (APPLE)
              set(PORTMIDI_LIB portmidi)
          else (APPLE)
@@ -295,7 +251,7 @@ index 2f3316cd5..c0c44404b 100644
          endif (APPLE)
          target_link_libraries(mscore ${PORTMIDI_LIB})
      endif (USE_PORTMIDI)
-@@ -564,7 +564,7 @@ else (MINGW)
+@@ -565,7 +565,7 @@ else (MINGW)
     set_target_properties (
        mscore
        PROPERTIES
@@ -304,19 +260,6 @@ index 2f3316cd5..c0c44404b 100644
        )
  
     if (OMR)
-diff --git a/mstyle/CMakeLists.txt b/mstyle/CMakeLists.txt
-index 2bc43c4bd..3fb96fcfa 100644
---- a/mstyle/CMakeLists.txt
-+++ b/mstyle/CMakeLists.txt
-@@ -49,7 +49,7 @@ add_library (
- set_target_properties (
-       mstyle
-       PROPERTIES
--         COMPILE_FLAGS "${PCH_INCLUDE} -g -Wall -Wextra -Winvalid-pch -Wno-overloaded-virtual"
-+         COMPILE_FLAGS "${PCH_INCLUDE} -fPIC -Wall -Wextra -Winvalid-pch -Wno-overloaded-virtual"
-       )
- 
- xcode_pch(mstyle all)
 diff --git a/mtest/CMakeLists.txt b/mtest/CMakeLists.txt
 index a992a25f4..6a1fd5cc5 100644
 --- a/mtest/CMakeLists.txt
