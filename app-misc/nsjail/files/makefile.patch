@@ -1,0 +1,29 @@
+diff --git a/Makefile b/Makefile
+index 2bb7de2..24c7ef8 100644
+--- a/Makefile
++++ b/Makefile
+@@ -17,21 +17,13 @@
+ #   limitations under the License.
+ #
+ 
+-CC ?= gcc
+-CXX ?= g++
+-
+-COMMON_FLAGS += -O2 -c \
+-	-D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
+-	-Wformat -Wformat=2 -Wformat-security -fPIE \
+-	-Wno-format-nonliteral \
+-	-Wall -Wextra -Werror \
+-	-Ikafel/include
++COMMON_FLAGS += -c -D_GNU_SOURCE -Ikafel/include
+ 
+ CFLAGS += $(COMMON_FLAGS) \
+ 	-std=gnu11
+ CXXFLAGS += $(COMMON_FLAGS) $(shell pkg-config --cflags protobuf) \
+-	-std=c++11 -Wno-unused -Wno-unused-parameter
+-LDFLAGS += -pie -Wl,-z,noexecstack -lpthread $(shell pkg-config --libs protobuf)
++	-std=c++11
++LDFLAGS += -lpthread $(shell pkg-config --libs protobuf)
+ 
+ BIN = nsjail
+ LIBS = kafel/libkafel.a
