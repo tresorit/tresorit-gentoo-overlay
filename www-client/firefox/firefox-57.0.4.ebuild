@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -123,6 +123,8 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
+	eapply "${FILESDIR}"/firefox-57.0-pkcs11-backport.patch
+	eapply "${FILESDIR}"/asciiext_compile_fix.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -164,8 +166,6 @@ src_prepare() {
 	# Keep codebase the same even if not using official branding
 	sed '/^MOZ_DEV_EDITION=1/d' \
 		-i "${S}"/browser/branding/aurora/configure.sh || die
-
-	eapply ${FILESDIR}/asciiext_compile_fix.patch
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user

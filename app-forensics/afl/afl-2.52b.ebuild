@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit multilib toolchain-funcs flag-o-matic
 
@@ -15,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 DEPEND="sys-devel/gcc:*
-	sys-devel/clang"
+	sys-devel/clang:*"
 RDEPEND="${DEPEND}"
 QA_PREBUILT="/usr/share/afl/testcases/others/elf/small_exec.elf"
 
