@@ -125,6 +125,7 @@ src_prepare() {
 	eapply "${WORKDIR}/firefox"
 	eapply "${FILESDIR}"/firefox-57.0-pkcs11-backport.patch
 	eapply "${FILESDIR}"/asciiext_compile_fix.patch
+	eapply "${FILESDIR}"/stylo-nightly.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
