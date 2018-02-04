@@ -1,0 +1,116 @@
+diff --git a/servo/components/layout/model.rs b/servo/components/layout/model.rs
+index 9d0d4c6..3d5d136 100644
+--- a/servo/components/layout/model.rs
++++ b/servo/components/layout/model.rs
+@@ -552,7 +552,7 @@ impl SizeConstraint {
+         max_size = max_size.map(|x| max(x, min_size));
+ 
+         if let Some(border) = border {
+-            min_size = max((min_size - border), Au(0));
++            min_size = max(min_size - border, Au(0));
+             max_size = max_size.map(|x| max(x - border, Au(0)));
+         }
+ 
+diff --git a/servo/components/layout/query.rs b/servo/components/layout/query.rs
+index 7fac8d3..d97518a 100644
+--- a/servo/components/layout/query.rs
++++ b/servo/components/layout/query.rs
+@@ -868,7 +868,7 @@ pub fn process_node_overflow_request<N: LayoutNode>(requested_node: N) -> NodeOv
+     let style = &*layout_node.as_element().unwrap().resolved_style();
+     let style_box = style.get_box();
+ 
+-    NodeOverflowResponse(Some((Point2D::new(style_box.overflow_x, style_box.overflow_y))))
++    NodeOverflowResponse(Some(Point2D::new(style_box.overflow_x, style_box.overflow_y)))
+ }
+ 
+ pub fn process_margin_style_query<N: LayoutNode>(requested_node: N)
+diff --git a/servo/components/script/dom/cssrulelist.rs b/servo/components/script/dom/cssrulelist.rs
+index 1f800a6..baa685d 100644
+--- a/servo/components/script/dom/cssrulelist.rs
++++ b/servo/components/script/dom/cssrulelist.rs
+@@ -103,7 +103,7 @@ impl CSSRuleList {
+         let parent_stylesheet = &*self.parent_stylesheet;
+         let dom_rule = CSSRule::new_specific(&window, parent_stylesheet, new_rule);
+         self.dom_rules.borrow_mut().insert(index, MutNullableDom::new(Some(&*dom_rule)));
+-        Ok((idx))
++        Ok(idx)
+     }
+ 
+     // In case of a keyframe rule, index must be valid.
+diff --git a/servo/components/script/dom/performanceobserver.rs b/servo/components/script/dom/performanceobserver.rs
+index 96ad99e..af43fe7 100644
+--- a/servo/components/script/dom/performanceobserver.rs
++++ b/servo/components/script/dom/performanceobserver.rs
+@@ -106,7 +106,7 @@ impl PerformanceObserverMethods for PerformanceObserver {
+         // step 2
+         // There must be at least one valid entry type.
+         if entry_types.is_empty() {
+-            return Err((Error::Type("entryTypes cannot be empty".to_string())));
++            return Err(Error::Type("entryTypes cannot be empty".to_string()));
+         }
+ 
+         // step 3-4-5
+diff --git a/servo/components/style/gecko/wrapper.rs b/servo/components/style/gecko/wrapper.rs
+index f25b93b..14e80a7 100644
+--- a/servo/components/style/gecko/wrapper.rs
++++ b/servo/components/style/gecko/wrapper.rs
+@@ -1761,7 +1761,7 @@ impl<'le> Eq for GeckoElement<'le> {}
+ 
+ impl<'le> Hash for GeckoElement<'le> {
+     fn hash<H: Hasher>(&self, state: &mut H) {
+-        (self.0 as *const _).hash(state);
++        (self.0 as *const RawGeckoElement).hash(state);
+     }
+ }
+ 
+diff --git a/servo/components/style/gecko_bindings/sugar/ownership.rs b/servo/components/style/gecko_bindings/sugar/ownership.rs
+index b0ac003..8695efa 100644
+--- a/servo/components/style/gecko_bindings/sugar/ownership.rs
++++ b/servo/components/style/gecko_bindings/sugar/ownership.rs
+@@ -109,7 +109,6 @@ pub unsafe trait HasArcFFI : HasFFI {
+     ///
+     /// &GeckoType -> &Arc<ServoType>
+     fn as_arc<'a>(ptr: &'a &Self::FFIType) -> &'a RawOffsetArc<Self> {
+-        debug_assert!(!(ptr as *const _).is_null());
+         unsafe {
+             transmute::<&&Self::FFIType, &RawOffsetArc<Self>>(ptr)
+         }
+diff --git a/servo/ports/cef/eutil.rs b/servo/ports/cef/eutil.rs
+index 03d98d3..0659161 100644
+--- a/servo/ports/cef/eutil.rs
++++ b/servo/ports/cef/eutil.rs
+@@ -30,7 +30,7 @@ pub fn slice_to_str<F>(s: *const u8, l: usize, f: F) -> c_int where F: FnOnce(&s
+ /// All fields are initialized to zero. It is the caller's responsibility to ensure that the given
+ /// type is a CEF type with `cef_base_t` as its first member.
+ pub unsafe fn create_cef_object<Base,Extra>(size: size_t) -> *mut Base {
+-    let object = libc::calloc(1, (mem::size_of::<Base>() + mem::size_of::<Extra>())) as
++    let object = libc::calloc(1, mem::size_of::<Base>() + mem::size_of::<Extra>()) as
+         *mut cef_base_t;
+     (*object).size = size;
+     (*object).add_ref = Some(servo_add_ref as extern "C" fn(*mut cef_base_t) -> c_int);
+diff --git a/servo/ports/cef/wrappers.rs b/servo/ports/cef/wrappers.rs
+index 16beca7..707ad0e 100644
+--- a/servo/ports/cef/wrappers.rs
++++ b/servo/ports/cef/wrappers.rs
+@@ -199,7 +199,7 @@ cef_unimplemented_wrapper!(cef_string_t, String);
+ impl<'a> CefWrap<*const cef_string_t> for &'a [u16] {
+     fn to_c(buffer: &'a [u16]) -> *const cef_string_t {
+         unsafe {
+-            let ptr = libc::malloc(((buffer.len() + 1) * 2)) as *mut c_ushort;
++            let ptr = libc::malloc((buffer.len() + 1) * 2) as *mut c_ushort;
+             ptr::copy(buffer.as_ptr(), ptr, buffer.len());
+             *ptr.offset(buffer.len() as isize) = 0;
+ 
+diff --git a/servo/ports/geckolib/glue.rs b/servo/ports/geckolib/glue.rs
+index d88b027..bf48fbc 100644
+--- a/servo/ports/geckolib/glue.rs
++++ b/servo/ports/geckolib/glue.rs
+@@ -4363,7 +4363,7 @@ pub extern "C" fn Servo_GetCustomPropertyValue(
+         None => return false,
+     };
+ 
+-    let name = unsafe { Atom::from((&*name)) };
++    let name = unsafe { Atom::from(&*name) };
+     let computed_value = match custom_properties.get(&name) {
+         Some(v) => v,
+         None => return false,
