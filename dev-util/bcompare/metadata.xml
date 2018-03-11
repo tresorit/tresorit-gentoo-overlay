@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+   <use>
+      <flag name="caja">Install context menu for caja.</flag>
+      <flag name="kde">Install context menu for kde.</flag>
+      <flag name="nautilus">Install context menu for nautilus.</flag>
+      <flag name="nemo">Install context menu for nemo.</flag>
+      <flag name="thunar">Install context menu for thunar.</flag>
+   </use>
+</pkgmetadata> 
