@@ -41,6 +41,11 @@ src_install()
 	mkdir -p "${D}/"usr/share/pixmaps
 	cp "${S}/"{bcompare.png,bcomparefull32.png,bcomparehalf32.png} "${D}/"usr/share/pixmaps/
 
+	# prevent revdep-rebuild from attempting to rebuild all the time
+	insinto /etc/revdep-rebuild
+	echo "SEARCH_DIRS_MASK=\"/usr/lib/beyondcompare\"" >> ${T}/20${PN}
+	doins "${T}/20${PN}"
+
 	if use caja; then
 		mkdir -p "${D}/"usr/lib/caja/extensions-3.0
 		cp "${S}/"ext/bcompare-ext-caja.amd64.so "${D}/"usr/lib/caja/extensions-3.0/
