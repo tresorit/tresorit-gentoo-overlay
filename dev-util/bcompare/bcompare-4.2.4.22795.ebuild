@@ -23,7 +23,7 @@ RDEPEND="
 src_install()
 {
 	mkdir -p "${D}/"usr/lib/beyondcompare
-	cp "${S}/"{bcmount.sh,bcmount32,bcmount64,BCompare,BCompare.mad,lib7z.so,libQt4Pas.so.5} "${D}/"usr/lib/beyondcompare/
+	cp "${S}/"{BCompare,BCompare.mad,lib7z.so,libQt4Pas.so.5} "${D}/"usr/lib/beyondcompare/
 	patchelf --set-rpath '$ORIGIN/' "${D}/"usr/lib/beyondcompare/BCompare
 
 	mkdir -p "${D}/"usr/bin
