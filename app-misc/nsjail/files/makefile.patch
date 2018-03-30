@@ -1,10 +1,10 @@
 diff --git a/Makefile b/Makefile
-index 2bb7de2..24c7ef8 100644
+index dfc49c0..5d9ca66 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -17,21 +17,13 @@
- #   limitations under the License.
- #
+@@ -21,19 +21,11 @@ ifeq ($(PKG_CONFIG),)
+ $(error "Install pkg-config to make it work")
+ endif
  
 -CC ?= gcc
 -CXX ?= g++
@@ -17,12 +17,10 @@ index 2bb7de2..24c7ef8 100644
 -	-Ikafel/include
 +COMMON_FLAGS += -c -D_GNU_SOURCE -Ikafel/include
  
- CFLAGS += $(COMMON_FLAGS) \
- 	-std=gnu11
  CXXFLAGS += $(COMMON_FLAGS) $(shell pkg-config --cflags protobuf) \
--	-std=c++11 -Wno-unused -Wno-unused-parameter
+-	-std=c++11 -fno-exceptions -Wno-unused -Wno-unused-parameter
 -LDFLAGS += -pie -Wl,-z,noexecstack -lpthread $(shell pkg-config --libs protobuf)
-+	-std=c++11
++	-std=c++11 -fno-exceptions
 +LDFLAGS += -lpthread $(shell pkg-config --libs protobuf)
  
  BIN = nsjail
