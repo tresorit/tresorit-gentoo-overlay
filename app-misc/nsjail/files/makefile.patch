@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index dfc49c0..5d9ca66 100644
+index 105fc96..fa18d01 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -21,19 +21,11 @@ ifeq ($(PKG_CONFIG),)
@@ -11,8 +11,8 @@ index dfc49c0..5d9ca66 100644
 -
 -COMMON_FLAGS += -O2 -c \
 -	-D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
--	-Wformat -Wformat=2 -Wformat-security -fPIE \
--	-Wno-format-nonliteral \
+-	-fPIE \
+-	-Wformat -Wformat-security -Wno-format-nonliteral \
 -	-Wall -Wextra -Werror \
 -	-Ikafel/include
 +COMMON_FLAGS += -c -D_GNU_SOURCE -Ikafel/include
