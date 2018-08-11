@@ -14,17 +14,16 @@ KEYWORDS="amd64"
 DEPEND="
     sys-fs/fuse
     sys-apps/attr
-    dev-libs/glib:2
+    dev-libs/icu
 "
 RDEPEND="$DEPEND"
 
-src_prepare() {
-	default
-	sed -i "s:-O[s0-9]::g" config.mk || die
-}
+PATCHES=(
+	"${FILESDIR}/${PN}.patch"
+)
 
 src_compile() {
-	emake CFLAGS_UNICODE='${CFLAGS_GLIB}' LDFLAGS_UNICODE='${LDFLAGS_GLIB}' || die
+	emake CFLAGS_UNICODE='${CFLAGS_ICU}' LDFLAGS_UNICODE='${LDFLAGS_ICU}' || die
 }
 
 src_install() {

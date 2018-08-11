@@ -1,0 +1,41 @@
+diff --git a/Makefile b/Makefile
+index 46dbd9e..63440b2 100644
+--- a/Makefile
++++ b/Makefile
+@@ -46,8 +46,8 @@ dist: clean
+ 	@rm -rf ciopfs-${VERSION}
+ 
+ install: ciopfs
+-	@echo stripping executable
+-	@strip -s ciopfs
++#	@echo stripping executable
++#	@strip -s ciopfs
+ 	@echo installing executable file to ${DESTDIR}${PREFIX}/bin
+ 	@mkdir -p ${DESTDIR}${PREFIX}/bin
+ 	@cp -f ciopfs ${DESTDIR}${PREFIX}/bin
+diff --git a/config.mk b/config.mk
+index 6bc8d25..e3b0a64 100644
+--- a/config.mk
++++ b/config.mk
+@@ -24,7 +24,7 @@ LDFLAGS_ICU = -licuuc
+ CFLAGS_UNICODE  = ${CFLAGS_GLIB}
+ LDFLAGS_UNICODE = ${LDFLAGS_GLIB}
+ 
+-CFLAGS  += ${CFLAGS_FUSE}  ${CFLAGS_UNICODE} -DVERSION=\"${VERSION}\" -DNDEBUG -Os
++CFLAGS  += ${CFLAGS_FUSE}  ${CFLAGS_UNICODE} -DVERSION=\"${VERSION}\"
+ LDFLAGS += ${LDFLAGS_FUSE} ${LDFLAGS_UNICODE} ${LDFLAGS_XATTR}
+ 
+ DEBUG_CFLAGS = ${CFLAGS} -UNDEBUG -O0 -g -ggdb -Wall
+diff --git a/unicode-icu.c b/unicode-icu.c
+index 898ce77..09ec2d6 100644
+--- a/unicode-icu.c
++++ b/unicode-icu.c
+@@ -69,7 +69,7 @@ static inline char *str_fold(const char *s)
+ 	ustr = utf8_to_utf16(s, &length);
+ 	if (!ustr)
+ 		return NULL;
+-	u_strFoldCase(ustr, length, ustr, length, U_FOLD_CASE_EXCLUDE_SPECIAL_I, &status);
++	u_strFoldCase(ustr, length, ustr, length, U_FOLD_CASE_DEFAULT, &status);
+ 	if (U_FAILURE(status))
+ 		return NULL;
+ 	str = utf16_to_utf8(ustr, &length);
