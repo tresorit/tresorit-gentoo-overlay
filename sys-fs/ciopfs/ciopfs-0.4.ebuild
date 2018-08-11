@@ -14,7 +14,7 @@ KEYWORDS="amd64"
 DEPEND="
     sys-fs/fuse
     sys-apps/attr
-    dev-libs/icu
+    dev-libs/glib:2
 "
 RDEPEND="$DEPEND"
 
@@ -24,7 +24,7 @@ src_prepare() {
 }
 
 src_compile() {
-	emake CFLAGS_UNICODE='${CFLAGS_ICU}' LDFLAGS_UNICODE='${LDFLAGS_ICU}' || die
+	emake CFLAGS_UNICODE='${CFLAGS_GLIB}' LDFLAGS_UNICODE='${LDFLAGS_GLIB}' || die
 }
 
 src_install() {
