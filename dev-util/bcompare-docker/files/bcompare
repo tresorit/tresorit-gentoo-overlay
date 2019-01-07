@@ -2,7 +2,7 @@
 
 DOCKER_DIR="/usr/lib/beyondcompare"
 
-if [ $(docker images -f label="vBCOMPARE_VERSION" | wc -l) -eq "1" ]; then
-    docker build --rm --build-arg USER --build-arg UID=`id -u` --build-arg GID=`id -g` --label "vBCOMPARE_VERSION" -t docker-bcompare $DOCKER_DIR
+if [ $(docker images -f label="bcompare-BCOMPARE_VERSION" | wc -l) -eq "1" ]; then
+    docker build --rm --build-arg USER --build-arg UID=`id -u` --build-arg GID=`id -g` --label "bcompare-BCOMPARE_VERSION" -t docker-bcompare $DOCKER_DIR
 fi
 docker run --rm -t -i -w $PWD -v /tmp:/tmp -v /home/${USER}:/home/${USER} -e DISPLAY=unix$DISPLAY docker-bcompare "$@"
