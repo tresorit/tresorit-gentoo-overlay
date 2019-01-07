@@ -2,7 +2,7 @@ EAPI=6
 
 DESCRIPTION="Compare, merge files and folders using simple, powerful commands."
 HOMEPAGE="https://www.scootersoftware.com"
-SRC_URI="https://www.scootersoftware.com/${P}_amd64.deb"
+SRC_URI="https://www.scootersoftware.com/bcompare-${PV}_amd64.deb"
 
 LICENSE="bcompare"
 SLOT="0"
