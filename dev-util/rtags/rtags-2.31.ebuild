@@ -19,5 +19,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="sys-devel/clang:=
-	sys-libs/ncurses:0"
+	sys-libs/ncurses:0
+	sys-libs/zlib
+	dev-libs/openssl:0="
 RDEPEND="${DEPEND}"
