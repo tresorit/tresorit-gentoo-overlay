@@ -5,7 +5,7 @@ EAPI=7
 
 inherit autotools
 
-DESCRIPTION="X11 screen lock utility with security in mind "
+DESCRIPTION="X11 screen lock utility with security in mind"
 HOMEPAGE="https://github.com/google/xsecurelock"
 SRC_URI="https://github.com/google/${PN}/releases/download/v${PV}/${P}.tar.gz"
 
@@ -32,15 +32,15 @@ BDEPEND="virtual/pkgconfig"
 
 src_configure() {
 	local myeconfargs=(
-			--prefix=/usr
-			--with-default-auth-module=auth_x11
-			--with-default-authproto-module=authproto_pam
-			--without-htpasswd
-			--without-mplayer
-			--without-mpv
-			--without-pamtester
-			--without-pandoc
-			--with-pam-service-name=system-auth
+		--prefix=/usr
+		--with-default-auth-module=auth_x11
+		--with-default-authproto-module=authproto_pam
+		--without-htpasswd
+		--without-mplayer
+		--without-mpv
+		--without-pamtester
+		--without-pandoc
+		--with-pam-service-name=system-auth
 	)
 	if use xscreensaver; then
 		myeconfargs+=(
@@ -55,4 +55,3 @@ src_configure() {
 	fi
 	econf "${myeconfargs[@]}"
 }
-
