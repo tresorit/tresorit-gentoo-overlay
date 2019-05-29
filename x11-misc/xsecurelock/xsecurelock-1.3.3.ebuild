@@ -11,10 +11,10 @@ SRC_URI="https://github.com/google/${PN}/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="Apache"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 ~x86"
 IUSE="+xscreensaver"
 
-DEPEND="
+RDEPEND="
 	sys-libs/pam
 	x11-libs/libX11
 	x11-libs/libXcomposite
@@ -27,12 +27,14 @@ DEPEND="
 	x11-libs/libXxf86misc
 	xscreensaver? ( x11-misc/xscreensaver )
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	x11-base/xorg-proto
+"
 BDEPEND="virtual/pkgconfig"
 
 src_configure() {
 	local myeconfargs=(
-		--prefix=/usr
+		--prefix="${EPREFIX}"/usr
 		--with-default-auth-module=auth_x11
 		--with-default-authproto-module=authproto_pam
 		--without-htpasswd
@@ -45,7 +47,7 @@ src_configure() {
 	if use xscreensaver; then
 		myeconfargs+=(
 			--with-default-saver-module=saver_xscreensaver
-			--with-xscreensaver=/usr/lib64/misc/xscreensaver
+			--with-xscreensaver="${EPREFIX}"/usr/$(get_libdir)/misc/xscreensaver
 		)
 	else
 		myeconfargs+=(
