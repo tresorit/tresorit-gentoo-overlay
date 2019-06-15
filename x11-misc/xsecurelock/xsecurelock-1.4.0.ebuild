@@ -15,6 +15,10 @@ KEYWORDS="amd64 ~x86"
 IUSE="+xscreensaver"
 
 RDEPEND="
+	dev-libs/libbsd
+	media-libs/fontconfig
+	media-libs/freetype
+	sys-apps/util-linux
 	sys-libs/pam
 	x11-libs/libX11
 	x11-libs/libXcomposite
@@ -31,6 +35,11 @@ DEPEND="${RDEPEND}
 	x11-base/xorg-proto
 "
 BDEPEND="virtual/pkgconfig"
+
+src_prepare() {
+	default
+	eautoreconf
+}
 
 src_configure() {
 	local myeconfargs=(
