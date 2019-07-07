@@ -1,7 +1,7 @@
 # To build: docker build --rm --build-arg USER --build-arg UID=`id -u` --build-arg GID=`id -g` -t docker-bcompare .
 # To run: docker run --rm -t -i -w $PWD -v /tmp:/tmp -v /home/${USER}:/home/${USER} -e DISPLAY=unix$DISPLAY docker-bcompare
 
-FROM debian:stretch
+FROM debian:buster
 
 ARG USER
 ARG UID
