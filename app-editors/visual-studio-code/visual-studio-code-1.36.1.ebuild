@@ -35,6 +35,8 @@ QA_PREBUILT="opt/${PN}/code"
 pkg_setup() {
 	if use amd64; then
 		S="${WORKDIR}/VSCode-linux-x64"
+	elif use x86; then
+		S="${WORKDIR}/VSCode-linux-ia32"
 	else
 		# shouldn't be possible with -* special keyword
 		die
