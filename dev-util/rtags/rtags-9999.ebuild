@@ -11,7 +11,7 @@ HOMEPAGE="http://www.rtags.net/"
 # project, so use the git version and the git-r3 eclass instead
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/Andersbakken/rtags.git"
-EGIT_COMMIT="master"
+EGIT_BRANCH="master"
 
 LICENSE="GPL-3+"
 SLOT="0"
