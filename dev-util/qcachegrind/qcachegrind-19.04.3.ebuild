@@ -1,14 +1,14 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=6
+EAPI=7
 
 inherit eutils qmake-utils
 
 DESCRIPTION="qcachegrind (part of kcachegrind)"
-HOMEPAGE="https://kcachegrind.github.io"
-SRC_URI="http://download.kde.org/stable/applications/${PV}/src/kcachegrind-${PV}.tar.xz"
+HOMEPAGE="https://kde.org/applications/development/kcachegrind
+https://kcachegrind.github.io/html/Home.html"
+SRC_URI="https://download.kde.org/stable/applications/${PV}/src/kcachegrind-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -16,12 +16,15 @@ KEYWORDS="amd64"
 
 S="${WORKDIR}/kcachegrind-${PV}"
 
-RDEPEND="
+DEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5[gif,jpeg,png,xcb]
 "
-DEPEND="${RDEPEND}
+RDEPEND="${DEPEND}
+	media-gfx/graphviz
+"
+BDEPEND="
 	dev-qt/linguist-tools:5
 	virtual/pkgconfig
 "
