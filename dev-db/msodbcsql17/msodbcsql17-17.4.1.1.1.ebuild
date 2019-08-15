@@ -24,6 +24,9 @@ S=${WORKDIR}
 
 QA_PREBUILT="*"
 
+DRIVER_NAME="ODBC Driver 17 for SQL Server"
+ODBCINST_INI="/opt/microsoft/msodbcsql17/etc/odbcinst.ini"
+
 src_unpack() {
 	unpack_deb ${A}
 }
@@ -31,4 +34,20 @@ src_unpack() {
 src_install() {
 	dodoc -r usr/share/doc
 	doins -r opt
+}
+
+pkg_postinst() {
+	ebegin "Installing ${DRIVER_NAME}"
+	/usr/bin/odbcinst -i -d -f "${ODBCINST_INI}"
+	rc=$?
+	eend $rc
+	[ $rc -ne 0 ] && die
+}
+
+pkg_prerm() {
+	ebegin "Uninstalling ${DRIVER_NAME}"
+	/usr/bin/odbcinst -u -d -n "${DRIVER_NAME}"
+	rc=$?
+	eend $rc
+	[ $rc -ne 0 ] && die
 }
