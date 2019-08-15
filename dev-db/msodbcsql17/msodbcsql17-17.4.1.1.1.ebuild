@@ -13,10 +13,10 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-DEPEND=""
+DEPEND="
+	dev-db/unixODBC"
 RDEPEND="${DEPEND}
 	sys-apps/util-linux
-	dev-db/unixODBC
 	virtual/krb5"
 BDEPEND=""
 
