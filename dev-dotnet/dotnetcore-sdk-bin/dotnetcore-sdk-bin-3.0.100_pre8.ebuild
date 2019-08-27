@@ -9,19 +9,21 @@ DESCRIPTION=".NET Core SDK - binary precompiled for glibc"
 HOMEPAGE="https://www.microsoft.com/net/core"
 LICENSE="MIT"
 
-OFFICIAL_PV="3.0.100-preview8-013656"
-
 SRC_URI="
-amd64? ( https://download.visualstudio.microsoft.com/download/pr/a0e368ac-7161-4bde-a139-1a3ef5a82bbe/439cdbb58950916d3718771c5d986c35/dotnet-sdk-${OFFICIAL_PV}-linux-x64.tar.gz -> dotnet-sdk-${OFFICIAL_PV}-linux-x64.tar.gz )
+amd64? ( https://download.visualstudio.microsoft.com/download/pr/a0e368ac-7161-4bde-a139-1a3ef5a82bbe/439cdbb58950916d3718771c5d986c35/dotnet-sdk-3.0.100-preview8-013656-linux-x64.tar.gz -> dotnet-sdk-3.0.100-preview8-013656-linux-x64.tar.gz )
 "
 
-SLOT="0"
+SLOT="3.0"
 KEYWORDS=""
+
+QA_PREBUILT="*"
+RESTRICT="splitdebug"
 
 # The sdk includes the runtime-bin and aspnet-bin so prevent from installing at the same time
 # dotnetcore-sdk is the source based build
 
 RDEPEND="
+	app-eselect/eselect-dotnet
 	>=sys-apps/lsb-release-1.4
 	>=sys-devel/llvm-4.0
 	>=dev-util/lldb-4.0
@@ -33,10 +35,18 @@ RDEPEND="
 	>=app-crypt/mit-krb5-1.14.2
 	>=sys-libs/zlib-1.2.8-r1
 	!dev-dotnet/dotnetcore-sdk
+	!dev-dotnet/dotnetcore-sdk-bin:0
 	!dev-dotnet/dotnetcore-runtime-bin
 	!dev-dotnet/dotnetcore-aspnet-bin"
 
 S=${WORKDIR}
+
+src_prepare() {
+	default
+	mkdir -p root/$SLOT || die
+	find . -maxdepth 1 -type f -exec mv {} root/$SLOT \; || die
+	find . -maxdepth 1 ! -name root ! -name . -exec ln -s ../../{} root/$SLOT/{} \; || die
+}
 
 src_install() {
 	local dest="opt/dotnet_core"
@@ -44,5 +54,21 @@ src_install() {
 
 	local ddest="${D}${dest}"
 	cp -a "${S}"/* "${ddest}/" || die
-	dosym "/${dest}/dotnet" "/usr/bin/dotnet"
+
+	dodir /usr/bin
+	cat <<-EOF >"${D}"/usr/bin/dotnet-${SLOT} || die
+		#!/bin/sh
+		DOTNET_HOME="/${dest}/root/${SLOT}" \\
+		DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true \\
+		exec /${dest}/root/${SLOT}/dotnet "\$@"
+	EOF
+	fperms +x /usr/bin/dotnet-${SLOT}
+}
+
+pkg_postinst() {
+	eselect dotnet update ifunset
+}
+
+pkg_postrm() {
+	eselect dotnet update ifunset
 }
