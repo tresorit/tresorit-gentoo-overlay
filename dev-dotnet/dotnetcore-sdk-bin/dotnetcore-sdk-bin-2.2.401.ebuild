@@ -59,6 +59,7 @@ src_install() {
 	cat <<-EOF >"${D}"/usr/bin/dotnet-${SLOT} || die
 		#!/bin/sh
 		DOTNET_HOME="/${dest}/root/${SLOT}" \\
+		DOTNET_ROOT="/${dest}/root/${SLOT}" \\
 		DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true \\
 		exec /${dest}/root/${SLOT}/dotnet "\$@"
 	EOF
