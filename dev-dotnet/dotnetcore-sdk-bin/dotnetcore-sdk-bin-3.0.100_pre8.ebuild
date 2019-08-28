@@ -61,6 +61,7 @@ src_install() {
 		DOTNET_HOME="/${dest}/root/${SLOT}" \\
 		DOTNET_ROOT="/${dest}/root/${SLOT}" \\
 		DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true \\
+		DOTNET_CLI_TELEMETRY_OPTOUT=true \\
 		exec /${dest}/root/${SLOT}/dotnet "\$@"
 	EOF
 	fperms +x /usr/bin/dotnet-${SLOT}
