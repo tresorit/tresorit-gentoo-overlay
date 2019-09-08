@@ -39,15 +39,5 @@ src_install() {
 
 	local ddest="${D}${dest}"
 	cp -a "${S}"/* "${ddest}/" || die
-
-	dodir /usr/bin
-	cat <<-EOF >"${D}"/usr/bin/dotnet || die
-		#!/bin/sh
-		DOTNET_HOME="/${dest}" \\
-		DOTNET_ROOT="/${dest}" \\
-		DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true \\
-		DOTNET_CLI_TELEMETRY_OPTOUT=true \\
-		exec /${dest}/dotnet "\$@"
-	EOF
-	fperms +x /usr/bin/dotnet
+	dosym "/${dest}/dotnet" "/usr/bin/dotnet"
 }
