@@ -43,6 +43,16 @@ S=${WORKDIR}
 
 src_prepare() {
 	default
+
+	# For current .NET Core versions, all the directories contain versioned files,
+	# but the top-level files (the dotnet binary for example) are shared between versions,
+	# and those are backward-compatible.
+	# These common files are installed by the non-slotted dev-dotnet/dotnetcore-sdk-bin-common
+	# package, while the directories are installed by dev-dotnet/dotnetcore-sdk-bin which uses
+	# slots depending on major .NET Core version.
+	# This makes it possible to install multiple major versions at the same time.
+
+	# Skip the common files
 	find . -maxdepth 1 -type f -exec rm -f {} \; || die
 }
 
