@@ -10,7 +10,7 @@ HOMEPAGE="https://www.microsoft.com/net/core"
 LICENSE="MIT"
 
 SRC_URI="
-amd64? ( https://download.visualstudio.microsoft.com/download/pr/498b8b41-7626-435e-bea8-878c39ccbbf3/c8df08e881d1bcf9a49a9ff5367090cc/dotnet-sdk-3.0.100-preview9-014004-linux-x64.tar.gz -> dotnet-sdk-3.0.100-preview9-014004-linux-x64.tar.gz )
+amd64? ( https://download.visualstudio.microsoft.com/download/pr/b81a2bd3-a8a4-4c7e-bd69-030f412ff7b4/3fc5f2c0481313daf2e18c348362ff3f/dotnet-sdk-3.0.100-rc1-014190-linux-x64.tar.gz -> dotnet-sdk-3.0.100-rc1-014190-linux-x64.tar.gz )
 "
 
 SLOT="3.0"
