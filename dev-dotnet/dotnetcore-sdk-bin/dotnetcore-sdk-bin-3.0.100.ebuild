@@ -47,6 +47,7 @@ src_prepare() {
 	# For current .NET Core versions, all the directories contain versioned files,
 	# but the top-level files (the dotnet binary for example) are shared between versions,
 	# and those are backward-compatible.
+	# The exception from this above rule is packs/NETStandard.Library.Ref which is shared between 3.0 and 3.1.
 	# These common files are installed by the non-slotted dev-dotnet/dotnetcore-sdk-bin-common
 	# package, while the directories are installed by dev-dotnet/dotnetcore-sdk-bin which uses
 	# slots depending on major .NET Core version.
@@ -54,6 +55,7 @@ src_prepare() {
 
 	# Skip the common files
 	find . -maxdepth 1 -type f -exec rm -f {} \; || die
+	rm -rf ./packs/NETStandard.Library.Ref || die
 }
 
 src_install() {
