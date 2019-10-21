@@ -14,7 +14,7 @@ amd64? ( https://download.visualstudio.microsoft.com/download/pr/8029a774-0cc8-4
 "
 
 SLOT="2.1"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 
 QA_PREBUILT="*"
 RESTRICT="splitdebug"
