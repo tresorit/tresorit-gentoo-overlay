@@ -1,4 +1,4 @@
-EAPI=6
+EAPI=7
 
 inherit xdg-utils
 
@@ -10,30 +10,34 @@ LICENSE="bcompare"
 SLOT="0"
 KEYWORDS="amd64"
 IUSE="caja kde konq nautilus nemo thunar"
+QA_PREBUILT="*"
 
-DEPEND="dev-util/patchelf"
+DEPEND=""
 RDEPEND="
 	app-arch/bzip2
-	dev-qt/qtcore:4
-	dev-qt/qtgui:4
 	sys-libs/zlib
 	x11-libs/libX11
 	"
+BDEPEND=""
 
 src_install()
 {
 	mkdir -p "${D}/"usr/lib/beyondcompare
-	cp "${S}/"{BCompare,BCompare.mad,lib7z.so,libQt4Pas.so.5} "${D}/"usr/lib/beyondcompare/
-	patchelf --set-rpath '$ORIGIN/' "${D}/"usr/lib/beyondcompare/BCompare
+	cp "${S}/"{BCompare,BCompare.mad,lib7z.so,libQt4Pas.so.5,libunrar.so,libQtCore.so.4,libQtGui.so.4,libQtNetwork.so.4} "${D}/"usr/lib/beyondcompare/
 
 	mkdir -p "${D}/"usr/bin
-	ln -s /usr/lib/beyondcompare/BCompare "${D}/"usr/bin/bcompare
+	cat <<-EOF >"${D}"/usr/bin/bcompare || die
+		#!/bin/sh
+		LD_LIBRARY_PATH="/usr/lib/beyondcompare" \\
+		exec /usr/lib/beyondcompare/BCompare "\$@"
+	EOF
+	fperms +x /usr/bin/bcompare
 
 	mkdir -p "${D}/"usr/share/applications
 	cp "${S}/"bcompare.desktop "${D}/"usr/share/applications/
 
-	mkdir -p "${D}/"usr/share/doc/beyondcompare
-	cp "${S}/"help/* "${D}/"usr/share/doc/beyondcompare/
+	mkdir -p "${D}/"usr/share/doc/${PF}
+	cp "${S}/"help/* "${D}/"usr/share/doc/${PF}/
 
 	mkdir -p "${D}/"usr/share/mime/packages
 	cp "${S}/"bcompare.xml "${D}/"usr/share/mime/packages/
