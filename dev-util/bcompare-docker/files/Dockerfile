@@ -11,7 +11,7 @@ COPY bcompare.deb /bcompare.deb
 
 RUN \
   apt-get update && \
-  apt-get install -y gnupg fonts-hack-ttf && \
+  apt-get install -y gnupg fonts-hack-ttf libglib2.0-0 && \
   { dpkg -i /bcompare.deb || true; } && \
   rm /bcompare.deb && \
   apt-get install -y -f && \
