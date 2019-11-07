@@ -15,8 +15,21 @@ QA_PREBUILT="*"
 DEPEND=""
 RDEPEND="
 	app-arch/bzip2
+	dev-libs/expat
+	dev-libs/glib
+	dev-libs/libbsd
+	dev-libs/libpcre
+	media-libs/fontconfig
+	media-libs/freetype
+	media-libs/libpng
+	sys-apps/util-linux
 	sys-libs/zlib
 	x11-libs/libX11
+	x11-libs/libXau
+	x11-libs/libxcb
+	x11-libs/libXdmcp
+	x11-libs/libXext
+	x11-libs/libXrender
 	"
 BDEPEND=""
 
