@@ -1,14 +1,14 @@
-# Copyright 2019 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI="7"
 
-DESCRIPTION="A cross-platform automation and configuration tool/framework"
-HOMEPAGE="https://github.com/Powershell/Powershell"
-LICENSE=""
+DESCRIPTION="PowerShell - binary precompiled for glibc"
+HOMEPAGE="https://powershell.org/"
+LICENSE="MIT"
 
 SRC_URI="
-	amd64? ( https://github.com/PowerShell/PowerShell/releases/download/v${PV}/powershell-${PV}-linux-x64.tar.gz )
+amd64? ( https://github.com/PowerShell/PowerShell/releases/download/v${PV}/powershell-${PV}-linux-x64.tar.gz )
 "
 
 SLOT="0"
@@ -28,14 +28,13 @@ RDEPEND="${DEPEND}
 	>=sys-libs/zlib-1.2.8-r1"
 BDEPEND=""
 
-S="${WORKDIR}"
+S=${WORKDIR}
 
 src_install() {
-	local dest="opt/powershell"
+	local dest="opt/pwsh"
 	dodir "${dest}"
-
 	local ddest="${D}/${dest}"
 	cp -a "${S}"/* "${ddest}/" || die
-	fperms +x "/${dest}/pwsh"
+	fperms 0755 "/${dest}/pwsh"
 	dosym "/${dest}/pwsh" "/usr/bin/pwsh"
 }
