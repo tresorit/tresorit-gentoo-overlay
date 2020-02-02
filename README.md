@@ -1,5 +1,7 @@
 # Portage overlay for Tresorit Core development
 
+[![Build Status](https://api.travis-ci.org/tresorit/tresorit-gentoo-overlay.svg?branch=master)](https://travis-ci.org/tresorit/tresorit-gentoo-overlay)
+
 This is a [Portage overlay][overlay] to install Tresorit Core development related applications.
 
 ## Install
