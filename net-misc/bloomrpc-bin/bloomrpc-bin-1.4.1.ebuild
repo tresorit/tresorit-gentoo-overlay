@@ -7,7 +7,7 @@ inherit unpacker
 
 DESCRIPTION="GUI Client for GRPC Services"
 HOMEPAGE="https://github.com/uw-labs/bloomrpc"
-SRC_URI="https://github.com/uw-labs/$PN/releases/download/$PV/bloomrpc_${PV}_amd64.deb"
+SRC_URI="https://github.com/uw-labs/bloomrpc/releases/download/$PV/bloomrpc_${PV}_amd64.deb"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -25,5 +25,5 @@ S="${WORKDIR}"
 src_install() {
 	dodir opt/bloomrpc
 	cp -a "${S}"/opt/BloomRPC/* "${D}/opt/bloomrpc/" || die
-	dosym /opt/bloomrpc/bloomrpc /usr/bin/bloomrpc
+	dosym "${EPREFIX}/opt/bloomrpc/bloomrpc" "/usr/bin/bloomrpc"
 }
