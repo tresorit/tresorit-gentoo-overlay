@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -8,7 +8,7 @@ inherit eutils qmake-utils
 DESCRIPTION="qcachegrind (part of kcachegrind)"
 HOMEPAGE="https://kde.org/applications/development/kcachegrind
 https://kcachegrind.github.io/html/Home.html"
-SRC_URI="https://download.kde.org/stable/applications/${PV}/src/kcachegrind-${PV}.tar.xz"
+SRC_URI="mirror://kde/stable/applications/${PV}/src/kcachegrind-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -44,7 +44,7 @@ src_compile() {
 src_install() {
 	cd qcachegrind || die
 	dodir /usr/bin
-    insinto /usr/bin
-    insopts -m 755
-    doins qcachegrind || die
+	insinto /usr/bin
+	insopts -m 755
+	doins qcachegrind || die
 }
