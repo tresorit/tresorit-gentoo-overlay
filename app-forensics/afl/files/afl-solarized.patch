@@ -1,7 +1,7 @@
-diff --git a/afl-2.34b/debug.h b/afl-2.34b/debug.h
+diff --git a/debug.h b/debug.h
 index a943a57..cb217bb 100644
---- a/afl-2.34b/debug.h
-+++ b/afl-2.34b/debug.h
+--- a/debug.h
++++ b/debug.h
 @@ -36,7 +36,7 @@
  #  define cMGN "\x1b[0;35m"
  #  define cCYA "\x1b[0;36m"
