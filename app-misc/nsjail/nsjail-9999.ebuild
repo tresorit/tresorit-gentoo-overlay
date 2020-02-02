@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -20,7 +20,7 @@ RDEPEND="${DEPEND}"
 PATCHES=( "${FILESDIR}/makefile.patch" )
 
 src_prepare() {
-    default
+	default
 	tc-export CC CXX
 }
 
@@ -28,4 +28,3 @@ src_install() {
 	dobin nsjail
 	dodoc README.md
 }
-

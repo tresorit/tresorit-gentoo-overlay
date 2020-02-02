@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -12,9 +12,9 @@ SLOT="0"
 KEYWORDS="amd64"
 
 DEPEND="
-    sys-fs/fuse
-    sys-apps/attr
-    dev-libs/icu
+	sys-fs/fuse:0=
+	sys-apps/attr
+	dev-libs/icu
 "
 RDEPEND="$DEPEND"
 

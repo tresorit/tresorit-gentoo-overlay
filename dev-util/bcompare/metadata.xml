@@ -4,8 +4,9 @@
    <use>
       <flag name="caja">Install context menu for caja.</flag>
       <flag name="kde">Install context menu for kde.</flag>
+      <flag name="konq">Install context menu for konq.</flag>
       <flag name="nautilus">Install context menu for nautilus.</flag>
       <flag name="nemo">Install context menu for nemo.</flag>
       <flag name="thunar">Install context menu for thunar.</flag>
    </use>
-</pkgmetadata> 
+</pkgmetadata>
