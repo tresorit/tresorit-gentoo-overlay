@@ -3,12 +3,12 @@
 
 EAPI=7
 
-inherit eutils qmake-utils
+KDE_ORG_NAME="kcachegrind"
+inherit eutils qmake-utils kde.org
 
 DESCRIPTION="qcachegrind (part of kcachegrind)"
 HOMEPAGE="https://kde.org/applications/development/kcachegrind
 https://kcachegrind.github.io/html/Home.html"
-SRC_URI="mirror://kde/stable/applications/${PV}/src/kcachegrind-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
