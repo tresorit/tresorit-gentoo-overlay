@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit linux-info python-any-r1
 
@@ -21,13 +21,13 @@ DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	virtual/pkgconfig"
 
+PATCHES=(
+	"${FILESDIR}"/${P}-gcc-10.patch
+	"${FILESDIR}"/${PN}-2.0.1-solarized.patch
+)
 DOCS=( ChangeLog README )
 
 CONFIG_CHECK="~TASKSTATS ~TASK_XACCT ~TASK_IO_ACCOUNTING ~CGROUPS"
-
-PATCHES=(
-	"${FILESDIR}/${PN}-2.0.1-solarized.patch"
-)
 
 pkg_setup() {
 	if ! has_version sys-process/lsof; then
