@@ -12,7 +12,7 @@ https://kcachegrind.github.io/html/Home.html"
 
 LICENSE="GPL-2"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 S="${WORKDIR}/${KDE_ORG_NAME}-${PV}"
 
