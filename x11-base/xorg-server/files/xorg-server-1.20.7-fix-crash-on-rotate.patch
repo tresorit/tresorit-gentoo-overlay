@@ -1,0 +1,12 @@
+diff -Naur xorg-server-1.20.7_orig/hw/xfree86/modes/xf86Rotate.c xorg-server-1.20.7/hw/xfree86/modes/xf86Rotate.c
+--- xorg-server-1.20.7_orig/hw/xfree86/modes/xf86Rotate.c	2020-03-12 22:31:26.672968169 +0100
++++ xorg-server-1.20.7/hw/xfree86/modes/xf86Rotate.c	2020-03-12 22:32:09.541967760 +0100
+@@ -176,7 +176,7 @@
+     DamagePtr damage = xf86_config->rotation_damage;
+     RegionPtr region;
+ 
+-    if (!damage)
++    if (!damage || !pScreen->root)
+         return FALSE;
+     xf86RotatePrepare(pScreen);
+     region = DamageRegion(damage);
