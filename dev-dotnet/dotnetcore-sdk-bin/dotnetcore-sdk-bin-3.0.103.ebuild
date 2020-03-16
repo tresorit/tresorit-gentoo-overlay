@@ -14,7 +14,7 @@ amd64? ( https://download.visualstudio.microsoft.com/download/pr/43f3a3bd-3df2-4
 "
 
 SLOT="3.0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 
 QA_PREBUILT="*"
 RESTRICT="splitdebug"
@@ -47,7 +47,7 @@ src_prepare() {
 	# For current .NET Core versions, all the directories contain versioned files,
 	# but the top-level files (the dotnet binary for example) are shared between versions,
 	# and those are backward-compatible.
-	# The exception from this above rule is packs/NETStandard.Library.Ref which is shared between 3.0 and 3.1.
+	# The exception from this above rule is packs/NETStandard.Library.Ref which is shared between >=3.0 versions.
 	# These common files are installed by the non-slotted dev-dotnet/dotnetcore-sdk-bin-common
 	# package, while the directories are installed by dev-dotnet/dotnetcore-sdk-bin which uses
 	# slots depending on major .NET Core version.

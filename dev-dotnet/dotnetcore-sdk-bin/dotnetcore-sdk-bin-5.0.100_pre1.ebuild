@@ -10,11 +10,11 @@ HOMEPAGE="https://www.microsoft.com/net/core"
 LICENSE="MIT"
 
 SRC_URI="
-amd64? ( https://download.visualstudio.microsoft.com/download/pr/57e63f03-ebdf-4c22-96ff-2b85dc70cf7f/988576869e82a80f4a97ca5a733a5295/dotnet-sdk-${PV}-linux-x64.tar.gz )
+amd64? ( https://download.visualstudio.microsoft.com/download/pr/c3d1886b-6846-4328-9692-a0adcdf30959/f0bd5e15b1825fc8f5b0a8166008e08a/dotnet-sdk-5.0.100-preview.1.20155.7-linux-x64.tar.gz )
 "
 
-SLOT="3.1"
-KEYWORDS="~amd64"
+SLOT="5.0"
+KEYWORDS=""
 
 QA_PREBUILT="*"
 RESTRICT="splitdebug"
@@ -47,7 +47,7 @@ src_prepare() {
 	# For current .NET Core versions, all the directories contain versioned files,
 	# but the top-level files (the dotnet binary for example) are shared between versions,
 	# and those are backward-compatible.
-	# The exception from this above rule is packs/NETStandard.Library.Ref which is shared between 3.0 and 3.1.
+	# The exception from this above rule is packs/NETStandard.Library.Ref which is shared between >=3.0 versions.
 	# These common files are installed by the non-slotted dev-dotnet/dotnetcore-sdk-bin-common
 	# package, while the directories are installed by dev-dotnet/dotnetcore-sdk-bin which uses
 	# slots depending on major .NET Core version.
