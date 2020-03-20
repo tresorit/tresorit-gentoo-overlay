@@ -12,14 +12,17 @@ https://kcachegrind.github.io/html/Home.html"
 
 LICENSE="GPL-2"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 S="${WORKDIR}/${KDE_ORG_NAME}-${PV}"
 
 DEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
-	dev-qt/qtgui:5[gif,jpeg,png,xcb]
+	|| (
+		dev-qt/qtgui:5[gif,jpeg,png,X(-)]
+		dev-qt/qtgui:5[gif,jpeg,png,xcb(-)]
+	)
 "
 RDEPEND="${DEPEND}
 	media-gfx/graphviz
