@@ -10,7 +10,7 @@ HOMEPAGE="https://www.microsoft.com/net/core"
 LICENSE="MIT"
 
 SRC_URI="
-amd64? ( https://download.visualstudio.microsoft.com/download/pr/daec2daf-b458-4ae1-9046-b8ba09b5fb49/733e2d73b41640d6e6bdf1cc6b9ef03b/dotnet-sdk-${PV}-linux-x64.tar.gz )
+amd64? ( https://download.visualstudio.microsoft.com/download/pr/e730fe40-e2ea-42e5-a5d0-f86830d75849/571e5a2f4ebf9f8117878eeaad5cb19b/dotnet-sdk-${PV}-linux-x64.tar.gz )
 "
 
 SLOT="0"
@@ -34,15 +34,13 @@ src_prepare() {
 	# For current .NET Core versions, all the directories contain versioned files,
 	# but the top-level files (the dotnet binary for example) are shared between versions,
 	# and those are backward-compatible.
-	# The exception from this above rule is packs/NETStandard.Library.Ref which is shared between >=3.0 versions.
 	# These common files are installed by the non-slotted dev-dotnet/dotnetcore-sdk-bin-common
 	# package, while the directories are installed by dev-dotnet/dotnetcore-sdk-bin which uses
 	# slots depending on major .NET Core version.
 	# This makes it possible to install multiple major versions at the same time.
 
 	# Skip the versioned files (which are located inside sub-directories)
-	find . -maxdepth 1 -type d ! -name . ! -name packs -exec rm -rf {} \; || die
-	find ./packs -maxdepth 1 -type d ! -name packs ! -name NETStandard.Library.Ref -exec rm -rf {} \; || die
+	find . -maxdepth 1 -type d ! -name . -exec rm -rf {} \; || die
 }
 
 src_install() {
