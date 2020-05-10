@@ -28,7 +28,6 @@ RDEPEND="
 	x11-libs/libXmu
 	x11-libs/libXrandr
 	x11-libs/libXScrnSaver
-	x11-libs/libXxf86misc
 	xscreensaver? ( x11-misc/xscreensaver )
 "
 DEPEND="${RDEPEND}
@@ -51,6 +50,7 @@ src_configure() {
 		--without-mpv
 		--without-pamtester
 		--without-pandoc
+		--without-xf86misc
 		--with-pam-service-name=system-auth
 	)
 	if use xscreensaver; then
