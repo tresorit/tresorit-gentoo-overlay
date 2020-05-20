@@ -10,11 +10,11 @@ HOMEPAGE="https://www.microsoft.com/net/core"
 LICENSE="MIT"
 
 SRC_URI="
-amd64? ( https://download.visualstudio.microsoft.com/download/pr/7d4c708b-38db-48b2-8532-9fc8a3ab0e42/23229fd17482119822bd9261b3570d87/dotnet-sdk-${PV}-linux-x64.tar.gz )
+amd64? ( https://download.visualstudio.microsoft.com/download/pr/473651e3-55d5-4e7c-b255-2cbe11358eea/6b6f33d86ee00720b36a7c34200f4d0c/dotnet-sdk-5.0.100-preview.4.20258.7-linux-x64.tar.gz )
 "
 
-SLOT="3.1"
-KEYWORDS="~amd64"
+SLOT="5.0"
+KEYWORDS=""
 
 QA_PREBUILT="*"
 RESTRICT="splitdebug"

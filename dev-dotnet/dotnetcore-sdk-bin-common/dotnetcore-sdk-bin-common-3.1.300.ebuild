@@ -10,7 +10,7 @@ HOMEPAGE="https://www.microsoft.com/net/core"
 LICENSE="MIT"
 
 SRC_URI="
-amd64? ( https://download.visualstudio.microsoft.com/download/pr/7d4c708b-38db-48b2-8532-9fc8a3ab0e42/23229fd17482119822bd9261b3570d87/dotnet-sdk-${PV}-linux-x64.tar.gz )
+amd64? ( https://download.visualstudio.microsoft.com/download/pr/0c795076-b679-457e-8267-f9dd20a8ca28/02446ea777b6f5a5478cd3244d8ed65b/dotnet-sdk-${PV}-linux-x64.tar.gz )
 "
 
 SLOT="0"
