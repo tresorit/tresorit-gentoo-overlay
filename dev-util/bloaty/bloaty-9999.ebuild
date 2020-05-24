@@ -11,9 +11,11 @@ LICENSE="Apache-2.0"
 SLOT="0"
 IUSE=""
 
-if [[ ${PV} == 9999 ]] ; then
+if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/google/${PN}"
+	IUSE+=" test"
+	RESTRICT="!test? ( test )"
 else
 	SRC_URI="https://github.com/google/${PN}/releases/download/v${PV}/${P}.tar.bz2"
 	KEYWORDS="~amd64"
@@ -29,22 +31,17 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-1.1-staticlibrary.patch"
-)
-
 src_configure() {
 	local mycmakeargs=(
 		-DBLOATY_ENABLE_CMAKETARGETS=OFF
+		-DBUILD_SHARED_LIBS=OFF
 		-DCMAKE_SKIP_RPATH=ON
 	)
+	if [[ ${PV} == 9999 ]]; then
+		mycmakeargs+=(
+			-DBUILD_TESTING=$(usex test)
+			$(usex test -DINSTALL_GTEST=OFF "")
+		)
+	fi
 	cmake-utils_src_configure
-}
-
-src_compile() {
-	cmake-utils_src_compile
-}
-
-src_install() {
-	cmake-utils_src_install
 }
