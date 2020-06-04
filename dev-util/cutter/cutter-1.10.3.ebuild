@@ -19,11 +19,11 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="
 	${PYTHON_DEPS}
-	>=dev-qt/qtcore-5.9.1:5
-	>=dev-qt/qtgui-5.9.1:5
-	>=dev-qt/qtsvg-5.9.1:5
-	>=dev-qt/qtwidgets-5.9.1:5
+	dev-qt/qtcore:5
+	dev-qt/qtgui:5
 	dev-qt/qtnetwork:5
+	dev-qt/qtsvg:5
+	dev-qt/qtwidgets:5
 	>=dev-util/radare2-4.4.0
 "
 
