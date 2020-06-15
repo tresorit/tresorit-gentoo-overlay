@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="A size profiler for binaries"
 HOMEPAGE="https://github.com/google/${PN}"
@@ -43,5 +43,5 @@ src_configure() {
 			$(usex test -DINSTALL_GTEST=OFF "")
 		)
 	fi
-	cmake-utils_src_configure
+	cmake_src_configure
 }
