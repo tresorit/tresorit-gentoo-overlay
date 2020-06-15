@@ -6,7 +6,7 @@ EAPI=7
 inherit cmake
 
 DESCRIPTION="A size profiler for binaries"
-HOMEPAGE="https://github.com/google/${PN}"
+HOMEPAGE="https://github.com/google/bloaty"
 LICENSE="Apache-2.0"
 SLOT="0"
 IUSE=""
@@ -40,7 +40,6 @@ src_configure() {
 	if [[ ${PV} == 9999 ]]; then
 		mycmakeargs+=(
 			-DBUILD_TESTING=$(usex test)
-			$(usex test -DINSTALL_GTEST=OFF "")
 		)
 	fi
 	cmake_src_configure
