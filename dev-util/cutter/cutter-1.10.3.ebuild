@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8,9} )
 
 inherit qmake-utils xdg-utils python-single-r1
 
@@ -31,6 +31,7 @@ RDEPEND="${DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.8.0-python3-config.patch"
+	"${FILESDIR}/${P}-qt-5.15.patch" # https://github.com/radareorg/cutter/pull/2231
 )
 
 src_configure() {
