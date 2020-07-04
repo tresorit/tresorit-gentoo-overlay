@@ -9,12 +9,11 @@ DESCRIPTION="A size profiler for binaries"
 HOMEPAGE="https://github.com/google/bloaty"
 LICENSE="Apache-2.0"
 SLOT="0"
-IUSE=""
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/google/${PN}"
-	IUSE+=" test"
+	IUSE="test"
 	RESTRICT="!test? ( test )"
 else
 	SRC_URI="https://github.com/google/${PN}/releases/download/v${PV}/${P}.tar.bz2"
@@ -34,8 +33,6 @@ RDEPEND="${DEPEND}"
 src_configure() {
 	local mycmakeargs=(
 		-DBLOATY_ENABLE_CMAKETARGETS=OFF
-		-DBUILD_SHARED_LIBS=OFF
-		-DCMAKE_SKIP_RPATH=ON
 	)
 	if [[ ${PV} == 9999 ]]; then
 		mycmakeargs+=(
