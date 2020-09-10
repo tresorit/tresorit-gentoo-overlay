@@ -19,10 +19,7 @@ S="${WORKDIR}/${KDE_ORG_NAME}-${PV}"
 DEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
-	|| (
-		dev-qt/qtgui:5[gif,jpeg,png,X(-)]
-		dev-qt/qtgui:5[gif,jpeg,png,xcb(-)]
-	)
+	dev-qt/qtgui:5[gif,jpeg,png,X]
 "
 RDEPEND="${DEPEND}
 	media-gfx/graphviz
