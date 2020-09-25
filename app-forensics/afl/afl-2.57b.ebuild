@@ -6,7 +6,7 @@ EAPI=7
 inherit multilib toolchain-funcs flag-o-matic
 
 DESCRIPTION="american fuzzy lop - compile-time instrumentation fuzzer"
-HOMEPAGE="http://lcamtuf.coredump.cx/afl/"
+HOMEPAGE="https://lcamtuf.coredump.cx/afl/"
 SRC_URI="https://github.com/google/AFL/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
@@ -26,21 +26,21 @@ PATCHES=(
 
 src_compile() {
 	emake CC="$(tc-getCC)" \
-		PREFIX="/usr" \
-		HELPER_PATH="/usr/$(get_libdir)/afl" \
-		DOC_PATH="/usr/share/doc/${PF}"
+		PREFIX="${EPREFIX}/usr" \
+		HELPER_PATH="${EPREFIX}/usr/$(get_libdir)/afl" \
+		DOC_PATH="${EPREFIX}/usr/share/doc/${PF}"
 	CC="clang" CXX="clang++" strip-unsupported-flags
 	cd llvm_mode || die
 	emake \
-		PREFIX="/usr" \
-		HELPER_PATH="/usr/$(get_libdir)/afl" \
-		DOC_PATH="/usr/share/doc/${PF}"
+		PREFIX="${EPREFIX}/usr" \
+		HELPER_PATH="${EPREFIX}/usr/$(get_libdir)/afl" \
+		DOC_PATH="${EPREFIX}/usr/share/doc/${PF}"
 }
 
 src_install() {
 	emake DESTDIR="${D}" \
-		PREFIX="/usr" \
-		HELPER_PATH="/usr/$(get_libdir)/afl" \
-		DOC_PATH="/usr/share/doc/${PF}" \
+		PREFIX="${EPREFIX}/usr" \
+		HELPER_PATH="${EPREFIX}/usr/$(get_libdir)/afl" \
+		DOC_PATH="${EPREFIX}/usr/share/doc/${PF}" \
 		install
 }
