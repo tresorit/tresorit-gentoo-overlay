@@ -12,16 +12,13 @@ LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
+RESTRICT=network-sandbox
 
 S="${WORKDIR}"
 QA_PREBUILT="*"
 
 src_unpack() {
-	if has network-sandbox ${FEATURES}; then
-		ewarn "This will probably fail, try to emerge this with FEATURES=\"-network-sandbox\""
-	fi
-
-	wget -U "Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0" -O $P.deb https://download-app.musixmatch.com/
+	wget -U "Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0" -O $P.deb https://download-app.musixmatch.com/ || die "Download failed"
 	unpack_deb $P.deb
 }
 
