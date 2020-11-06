@@ -109,7 +109,6 @@ src_configure() {
 	local libdir=$(get_libdir)
 	local mycmakeargs=(
 		-DBUILD_BROWSER=$(usex browser)
-		-DCEF_ROOT_DIR="../${CEF_DIR}"
 		-DDISABLE_ALSA=$(usex !alsa)
 		-DDISABLE_FREETYPE=$(usex !truetype)
 		-DDISABLE_JACK=$(usex !jack)
@@ -127,6 +126,12 @@ src_configure() {
 	if [ "${PV}" != "9999" ]; then
 		mycmakeargs+=(
 			-DOBS_VERSION_OVERRIDE=${PV}
+		)
+	fi
+
+	if use browser; then
+		mycmakeargs+=(
+			-DCEF_ROOT_DIR="../${CEF_DIR}"
 		)
 	fi
 
