@@ -108,6 +108,8 @@ src_unpack() {
 src_configure() {
 	local libdir=$(get_libdir)
 	local mycmakeargs=(
+		-DBUILD_BROWSER=$(usex browser)
+		-DCEF_ROOT_DIR="../${CEF_DIR}"
 		-DDISABLE_ALSA=$(usex !alsa)
 		-DDISABLE_FREETYPE=$(usex !truetype)
 		-DDISABLE_JACK=$(usex !jack)
@@ -120,8 +122,6 @@ src_configure() {
 		-DOBS_MULTIARCH_SUFFIX=${libdir#lib}
 		-DUNIX_STRUCTURE=1
 		-DWITH_RTMPS=$(usex ssl)
-		-DBUILD_BROWSER=$(usex browser)
-		-DCEF_ROOT_DIR="../${CEF_DIR}"
 	)
 
 	if [ "${PV}" != "9999" ]; then
