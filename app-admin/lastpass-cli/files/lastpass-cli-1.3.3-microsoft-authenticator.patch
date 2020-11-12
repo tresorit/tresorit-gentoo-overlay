@@ -1,0 +1,31 @@
+From 95c050f42a6d8f321a9d58a75c73f2ad42dbbda1 Mon Sep 17 00:00:00 2001
+From: John Hammerlund <johnhammerlund@gmail.com>
+Date: Thu, 22 Aug 2019 16:24:55 -0700
+Subject: [PATCH] Add MFA support for Microsoft Authenticator
+
+MS Authenticator is currently incompatible with this tool (#442). I noticed that MFA errors are mapped in an array of `multifactor_type`, which I've updated with the appropriate error codes for MS Authenticator (tested running through a debugger).
+
+Signed-off-by: John Hammerlund johnhammerlund@gmail.com
+---
+ endpoints-login.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/endpoints-login.c b/endpoints-login.c
+index e6193ae..098a8e0 100644
+--- a/endpoints-login.c
++++ b/endpoints-login.c
+@@ -75,7 +75,13 @@ static struct multifactor_type multifactor_types[] = {
+ 		.error_str = "outofbandrequired",
+ 		.error_failure_str = "multifactorresponsefailed",
+ 		.post_var = "otp"
+-	}
++	},
++    {
++        .name = "Microsoft Authenticator Code",
++        .error_str = "microsoftauthrequired",
++        .error_failure_str = "microsoftauthfailed",
++        .post_var = "otp"
++    }
+ };
+ 
+ static void filter_error_message(char *message)
