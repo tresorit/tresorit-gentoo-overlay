@@ -6,7 +6,7 @@ EAPI=7
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
 PYTHON_COMPAT=( python3_{6,7} )
 
-OBS_BROWSER_COMMIT="6162c93f370f0dfb71ed5ff0b6efac1648ec0da4"
+OBS_BROWSER_COMMIT="66f41fe741ce5f4974d3aeff2bb559c59bb7165e"
 CEF_DIR="cef_binary_3770_linux64"
 
 inherit cmake-utils python-single-r1 xdg-utils
@@ -86,6 +86,8 @@ QA_PREBUILT="
 	/usr/lib*/obs-plugins/libcef.so
 	/usr/lib*/obs-plugins/libGLESv2.so
 "
+
+PATCHES=( "${FILESDIR}/${PN}-25.0.8-gcc-10-build.patch" )
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
