@@ -4,12 +4,12 @@
 EAPI=7
 
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8,9} )
 
 OBS_BROWSER_COMMIT="66f41fe741ce5f4974d3aeff2bb559c59bb7165e"
 CEF_DIR="cef_binary_3770_linux64"
 
-inherit cmake-utils python-single-r1 xdg-utils
+inherit cmake python-single-r1 xdg-utils
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -145,11 +145,11 @@ src_configure() {
 		mycmakeargs+=( -DENABLE_SCRIPTING=no )
 	fi
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_install() {
-	cmake-utils_src_install
+	cmake_src_install
 	#external plugins may need some things not installed by default, install them here
 	insinto /usr/include/obs/UI/obs-frontend-api
 	doins UI/obs-frontend-api/obs-frontend-api.h
