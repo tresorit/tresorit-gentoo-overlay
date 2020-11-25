@@ -6,7 +6,7 @@ EAPI=7
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
 PYTHON_COMPAT=( python3_{6,7} )
 
-OBS_BROWSER_COMMIT="6162c93f370f0dfb71ed5ff0b6efac1648ec0da4"
+OBS_BROWSER_COMMIT="5b16ce39cfc12f969e93d3be920f77367fde816b"
 CEF_DIR="cef_binary_3770_linux64"
 
 inherit cmake-utils python-single-r1 xdg-utils
@@ -93,7 +93,7 @@ pkg_setup() {
 
 src_unpack() {
 	default
-	if [ "${PV}" != "9999" ]; then
+	if [[ ${PV} != *9999 ]]; then
 		if use browser; then
 			rm -d "${P}/plugins/obs-browser" || die
 			mv "obs-browser-${OBS_BROWSER_COMMIT}" "${P}/plugins/obs-browser" || die
@@ -121,7 +121,7 @@ src_configure() {
 		-DWITH_RTMPS=$(usex ssl)
 	)
 
-	if [ "${PV}" != "9999" ]; then
+	if [[ ${PV} != *9999 ]]; then
 		mycmakeargs+=(
 			-DOBS_VERSION_OVERRIDE=${PV}
 		)
