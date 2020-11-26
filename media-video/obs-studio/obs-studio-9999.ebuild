@@ -4,7 +4,7 @@
 EAPI=7
 
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
-PYTHON_COMPAT=( python3_{6,7,8,9} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 OBS_BROWSER_COMMIT="5b16ce39cfc12f969e93d3be920f77367fde816b"
 CEF_DIR="cef_binary_3770_linux64"
