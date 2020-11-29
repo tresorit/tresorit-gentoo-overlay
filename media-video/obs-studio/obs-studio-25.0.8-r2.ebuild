@@ -28,7 +28,10 @@ HOMEPAGE="https://obsproject.com"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="+alsa browser fdk imagemagick jack luajit nvenc pulseaudio python speex +ssl truetype v4l vlc"
-REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+REQUIRED_USE="
+	browser? ( || ( alsa pulseaudio ) )
+	python? ( ${PYTHON_REQUIRED_USE} )
+"
 
 BDEPEND="
 	luajit? ( dev-lang/swig )
@@ -60,6 +63,22 @@ DEPEND="
 	x11-libs/libXrandr
 	x11-libs/libxcb
 	alsa? ( media-libs/alsa-lib )
+	browser? (
+		app-accessibility/at-spi2-atk
+		dev-libs/atk
+		dev-libs/expat
+		dev-libs/glib
+		dev-libs/nspr
+		dev-libs/nss
+		media-libs/fontconfig
+		x11-libs/libXScrnSaver
+		x11-libs/libXcursor
+		x11-libs/libXdamage
+		x11-libs/libXext
+		x11-libs/libXi
+		x11-libs/libXrender
+		x11-libs/libXtst
+	)
 	fdk? ( media-libs/fdk-aac:= )
 	imagemagick? ( media-gfx/imagemagick:= )
 	jack? ( virtual/jack )
