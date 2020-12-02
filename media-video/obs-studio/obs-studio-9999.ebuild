@@ -6,7 +6,7 @@ EAPI=7
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
 PYTHON_COMPAT=( python3_{6,7} )
 
-OBS_BROWSER_COMMIT="5b16ce39cfc12f969e93d3be920f77367fde816b"
+OBS_BROWSER_COMMIT="7143a01e9499d0005129a1fbff844c8be5f16765"
 CEF_DIR="cef_binary_3770_linux64"
 
 inherit cmake python-single-r1 xdg-utils
@@ -71,12 +71,12 @@ DEPEND="
 		dev-libs/nspr
 		dev-libs/nss
 		media-libs/fontconfig
-		x11-libs/libXScrnSaver
 		x11-libs/libXcursor
 		x11-libs/libXdamage
 		x11-libs/libXext
 		x11-libs/libXi
 		x11-libs/libXrender
+		x11-libs/libXScrnSaver
 		x11-libs/libXtst
 	)
 	fdk? ( media-libs/fdk-aac:= )
@@ -98,12 +98,12 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 QA_PREBUILT="
-	/usr/lib*/obs-plugins/swiftshader/libEGL.so
-	/usr/lib*/obs-plugins/swiftshader/libGLESv2.so
-	/usr/lib*/obs-plugins/libEGL.so
 	/usr/lib*/obs-plugins/chrome-sandbox
 	/usr/lib*/obs-plugins/libcef.so
+	/usr/lib*/obs-plugins/libEGL.so
 	/usr/lib*/obs-plugins/libGLESv2.so
+	/usr/lib*/obs-plugins/swiftshader/libEGL.so
+	/usr/lib*/obs-plugins/swiftshader/libGLESv2.so
 "
 
 pkg_setup() {

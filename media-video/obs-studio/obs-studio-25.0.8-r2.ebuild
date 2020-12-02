@@ -71,12 +71,12 @@ DEPEND="
 		dev-libs/nspr
 		dev-libs/nss
 		media-libs/fontconfig
-		x11-libs/libXScrnSaver
 		x11-libs/libXcursor
 		x11-libs/libXdamage
 		x11-libs/libXext
 		x11-libs/libXi
 		x11-libs/libXrender
+		x11-libs/libXScrnSaver
 		x11-libs/libXtst
 	)
 	fdk? ( media-libs/fdk-aac:= )
@@ -98,12 +98,12 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 QA_PREBUILT="
-	/usr/lib*/obs-plugins/swiftshader/libEGL.so
-	/usr/lib*/obs-plugins/swiftshader/libGLESv2.so
-	/usr/lib*/obs-plugins/libEGL.so
 	/usr/lib*/obs-plugins/chrome-sandbox
 	/usr/lib*/obs-plugins/libcef.so
+	/usr/lib*/obs-plugins/libEGL.so
 	/usr/lib*/obs-plugins/libGLESv2.so
+	/usr/lib*/obs-plugins/swiftshader/libEGL.so
+	/usr/lib*/obs-plugins/swiftshader/libGLESv2.so
 "
 
 PATCHES=( "${FILESDIR}/${PN}-25.0.8-gcc-10-build.patch" )
