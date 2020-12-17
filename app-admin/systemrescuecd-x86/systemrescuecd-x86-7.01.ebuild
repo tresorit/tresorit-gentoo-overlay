@@ -10,7 +10,7 @@ SRC_URI="https://osdn.net/projects/systemrescuecd/storage/releases/${PV}/${MY_P}
 
 LICENSE="Apache-1.0 Apache-2.0 Artistic Artistic-2 BEER-WARE BSD BSD-2 BSD-4 CC0-1.0 CC-BY-SA-3.0 FDL-1.3+ GPL-2 GPL-2+ GPL-3+ icu ISC JasPer2.0 LGPL-2+ LGPL-2.1+ LGPL-3+ linux-firmware MaxMind2 MIT MPL-1.1 MPL-2.0 no-source-code OFL Old-MIT OPENLDAP openssl PSF-2 public-domain Sleepycat unRAR UoI-NCSA vim ZLIB"
 SLOT="${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+isohybrid"
 RESTRICT="bindist mirror"
 
