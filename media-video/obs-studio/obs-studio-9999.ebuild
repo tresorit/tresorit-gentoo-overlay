@@ -4,12 +4,13 @@
 EAPI=7
 
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
+LUA_COMPAT=( luajit )
 PYTHON_COMPAT=( python3_{6,7} )
 
-OBS_BROWSER_COMMIT="7143a01e9499d0005129a1fbff844c8be5f16765"
+OBS_BROWSER_COMMIT="751cd04a3c00faa2c4cd8bf1419acffb71245e0c"
 CEF_DIR="cef_binary_3770_linux64"
 
-inherit cmake python-single-r1 xdg-utils
+inherit cmake lua-single python-single-r1 xdg-utils
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -30,6 +31,7 @@ SLOT="0"
 IUSE="+alsa browser fdk imagemagick jack luajit nvenc pulseaudio python speex +ssl truetype v4l vlc"
 REQUIRED_USE="
 	browser? ( || ( alsa pulseaudio ) )
+	luajit? ( ${LUA_REQUIRED_USE} )
 	python? ( ${PYTHON_REQUIRED_USE} )
 "
 
@@ -82,7 +84,7 @@ DEPEND="
 	fdk? ( media-libs/fdk-aac:= )
 	imagemagick? ( media-gfx/imagemagick:= )
 	jack? ( virtual/jack )
-	luajit? ( dev-lang/luajit:2 )
+	luajit? ( ${LUA_DEPS} )
 	nvenc? ( >=media-video/ffmpeg-4[video_cards_nvidia] )
 	pulseaudio? ( media-sound/pulseaudio )
 	python? ( ${PYTHON_DEPS} )
@@ -107,6 +109,7 @@ QA_PREBUILT="
 "
 
 pkg_setup() {
+	use luajit && lua-single_pkg_setup
 	use python && python-single-r1_pkg_setup
 }
 
