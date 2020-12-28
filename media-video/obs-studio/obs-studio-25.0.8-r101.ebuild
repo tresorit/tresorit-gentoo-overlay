@@ -4,13 +4,14 @@
 EAPI=7
 
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
+LUA_COMPAT=( luajit )
 # Does not work with 3.8+ https://bugs.gentoo.org/754006
 PYTHON_COMPAT=( python3_{6,7} )
 
 OBS_BROWSER_COMMIT="66f41fe741ce5f4974d3aeff2bb559c59bb7165e"
 CEF_DIR="cef_binary_3770_linux64"
 
-inherit cmake python-single-r1 xdg-utils
+inherit cmake lua-single python-single-r1 xdg-utils
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -28,14 +29,15 @@ HOMEPAGE="https://obsproject.com"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+alsa browser fdk imagemagick jack luajit nvenc pulseaudio python speex +ssl truetype v4l vlc"
+IUSE="+alsa browser fdk imagemagick jack lua nvenc pulseaudio python speex +ssl truetype v4l vlc"
 REQUIRED_USE="
 	browser? ( || ( alsa pulseaudio ) )
+	lua? ( ${LUA_REQUIRED_USE} )
 	python? ( ${PYTHON_REQUIRED_USE} )
 "
 
 BDEPEND="
-	luajit? ( dev-lang/swig )
+	lua? ( dev-lang/swig )
 	python? ( dev-lang/swig )
 "
 DEPEND="
@@ -83,7 +85,7 @@ DEPEND="
 	fdk? ( media-libs/fdk-aac:= )
 	imagemagick? ( media-gfx/imagemagick:= )
 	jack? ( virtual/jack )
-	luajit? ( dev-lang/luajit:2 )
+	lua? ( ${LUA_DEPS} )
 	nvenc? ( >=media-video/ffmpeg-4[video_cards_nvidia] )
 	pulseaudio? ( media-sound/pulseaudio )
 	python? ( ${PYTHON_DEPS} )
@@ -110,6 +112,7 @@ QA_PREBUILT="
 PATCHES=( "${FILESDIR}/${PN}-25.0.8-gcc-10-build.patch" )
 
 pkg_setup() {
+	use lua && lua-single_pkg_setup
 	use python && python-single-r1_pkg_setup
 }
 
@@ -155,9 +158,9 @@ src_configure() {
 		)
 	fi
 
-	if use luajit || use python; then
+	if use lua || use python; then
 		mycmakeargs+=(
-			-DDISABLE_LUA=$(usex !luajit)
+			-DDISABLE_LUA=$(usex !lua)
 			-DDISABLE_PYTHON=$(usex !python)
 			-DENABLE_SCRIPTING=yes
 		)
