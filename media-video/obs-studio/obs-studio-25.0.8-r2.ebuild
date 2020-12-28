@@ -4,6 +4,7 @@
 EAPI=7
 
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
+# Does not work with 3.8+ https://bugs.gentoo.org/754006
 PYTHON_COMPAT=( python3_{6,7} )
 
 OBS_BROWSER_COMMIT="66f41fe741ce5f4974d3aeff2bb559c59bb7165e"
