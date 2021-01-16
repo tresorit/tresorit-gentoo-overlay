@@ -14,7 +14,7 @@ KEYWORDS="amd64"
 DEPEND="
 	sys-fs/fuse:0=
 	sys-apps/attr
-	dev-libs/icu
+	dev-libs/icu:=
 "
 RDEPEND="$DEPEND"
 
