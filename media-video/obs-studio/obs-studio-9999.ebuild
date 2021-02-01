@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,10 +6,10 @@ EAPI=7
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
 LUA_COMPAT=( luajit )
 # Does not work with 3.8+ https://bugs.gentoo.org/754006
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_7 )
 
-OBS_BROWSER_COMMIT="751cd04a3c00faa2c4cd8bf1419acffb71245e0c"
-CEF_DIR="cef_binary_3770_linux64"
+OBS_BROWSER_COMMIT="200f34d94c75a681d9c609850029188f246c13f5"
+CEF_DIR="cef_binary_4280_linux64"
 
 inherit cmake lua-single python-single-r1 xdg-utils
 

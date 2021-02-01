@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,10 +6,10 @@ EAPI=7
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
 LUA_COMPAT=( luajit )
 # Does not work with 3.8+ https://bugs.gentoo.org/754006
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_7 )
 
-OBS_BROWSER_COMMIT="66f41fe741ce5f4974d3aeff2bb559c59bb7165e"
-CEF_DIR="cef_binary_3770_linux64"
+OBS_BROWSER_COMMIT="53cfefe74a2347e9054212bb4c014766e53ee5f4"
+CEF_DIR="cef_binary_4280_linux64"
 
 inherit cmake lua-single python-single-r1 xdg-utils
 
@@ -109,7 +109,7 @@ QA_PREBUILT="
 	/usr/lib*/obs-plugins/swiftshader/libGLESv2.so
 "
 
-PATCHES=( "${FILESDIR}/${PN}-25.0.8-gcc-10-build.patch" )
+PATCHES=( "${FILESDIR}/${PN}-26.1.2-fix-alsa-crash.patch" )
 
 pkg_setup() {
 	use lua && lua-single_pkg_setup
