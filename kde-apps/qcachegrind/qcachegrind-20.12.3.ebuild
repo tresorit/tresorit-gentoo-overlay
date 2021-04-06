@@ -1,10 +1,10 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 KDE_ORG_NAME="kcachegrind"
-QTMIN=5.15.1
+QTMIN=5.15.2
 inherit eutils qmake-utils kde.org
 
 DESCRIPTION="Frontend for Cachegrind by KDE (Qt-only version)"
