@@ -5,8 +5,7 @@ EAPI=7
 
 CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
 LUA_COMPAT=( luajit )
-# Does not work with 3.8+ https://bugs.gentoo.org/754006
-PYTHON_COMPAT=( python3_7 )
+PYTHON_COMPAT=( python3_{7..9} )
 
 OBS_BROWSER_COMMIT="53cfefe74a2347e9054212bb4c014766e53ee5f4"
 CEF_DIR="cef_binary_4280_linux64"
@@ -109,7 +108,10 @@ QA_PREBUILT="
 	/usr/lib*/obs-plugins/swiftshader/libGLESv2.so
 "
 
-PATCHES=( "${FILESDIR}/${PN}-26.1.2-fix-alsa-crash.patch" )
+PATCHES=(
+	"${FILESDIR}/${PN}-26.1.2-fix-alsa-crash.patch"
+	"${FILESDIR}/${PN}-26.1.2-python-3.8.patch" # https://github.com/obsproject/obs-studio/pull/3335
+)
 
 pkg_setup() {
 	use lua && lua-single_pkg_setup
@@ -197,6 +199,16 @@ pkg_postinst() {
 		elog "'xdg-screensaver reset' is used instead"
 		elog "(if 'x11-misc/xdg-utils' is installed)."
 		elog
+	fi
+}
+
+pkg_postinst() {
+	if use python; then
+		ewarn "This ebuild applies a patch that is not yet accepted upstream,"
+		ewarn "and while it fixes Python support at least to some extent, it"
+		ewarn "may cause other issues."
+		ewarn ""
+		ewarn "Please report any such issues to the Gentoo maintainer."
 	fi
 }
 
