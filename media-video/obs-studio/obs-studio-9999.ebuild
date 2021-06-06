@@ -7,7 +7,7 @@ CMAKE_REMOVE_MODULES_LIST=( FindFreetype )
 LUA_COMPAT=( luajit )
 PYTHON_COMPAT=( python3_{7..9} )
 
-OBS_BROWSER_COMMIT="200f34d94c75a681d9c609850029188f246c13f5"
+OBS_BROWSER_COMMIT="f1a61c5a2579e5673765c31a47c2053d4b502d4b"
 CEF_DIR="cef_binary_4280_linux64"
 
 inherit cmake lua-single python-single-r1 xdg-utils
