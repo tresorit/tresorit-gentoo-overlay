@@ -30,7 +30,7 @@ RDEPEND="
 	app-crypt/mit-krb5
 	>=dev-dotnet/dotnetcore-sdk-bin-common-${PV}
 	dev-libs/icu
-	|| ( dev-libs/openssl-compat:1.0.0 =dev-libs/openssl-1.0*:* )
+	|| ( dev-libs/openssl dev-libs/openssl-compat:1.0.0 )
 	dev-util/lldb
 	dev-util/lttng-ust
 	net-misc/curl
