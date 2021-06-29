@@ -34,5 +34,5 @@ src_install() {
 	insinto "/opt/${PN}"
 	doins -r *
 	fperms +x /opt/${PN}/ovftool{,.bin}
-	dosym "../../opt/${PN}/ovftool" "usr/bin/ovftool"
+	dosym "/opt/${PN}/ovftool" "usr/bin/ovftool"
 }
