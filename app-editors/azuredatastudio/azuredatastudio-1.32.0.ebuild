@@ -12,6 +12,8 @@ SRC_URI="
 "
 S="${WORKDIR}"
 
+SQLTOOLSSERVICE_VERSION="3.0.0-release.121"
+
 RESTRICT="mirror strip bindist"
 
 LICENSE="
@@ -77,7 +79,7 @@ src_install() {
 	fi
 
 	pax-mark m ${PN}
-	patchelf --set-rpath "${EPREFIX}/opt/${PN}" resources/app/extensions/mssql/sqltoolsservice/Linux/*/System.Security.Cryptography.Native.OpenSsl.so || die
+	patchelf --set-rpath "${EPREFIX}/opt/${PN}" resources/app/extensions/mssql/sqltoolsservice/Linux/${SQLTOOLSSERVICE_VERSION}/System.Security.Cryptography.Native.OpenSsl.so || die
 	insinto "/opt/${PN}"
 	doins -r *
 	fperms +x /opt/${PN}/{,bin/}${PN}
@@ -85,11 +87,11 @@ src_install() {
 	fperms 755 /opt/${PN}/resources/app/extensions/git/dist/askpass.sh
 	fperms 755 /opt/${PN}/resources/app/extensions/git/dist/askpass-empty.sh
 	fperms -R +x /opt/${PN}/resources/app/out/vs/base/node
-	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/*/createdump
-	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/*/MicrosoftKustoServiceLayer
-	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/*/MicrosoftSqlToolsCredentials
-	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/*/MicrosoftSqlToolsServiceLayer
-	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/*/SqlToolsResourceProviderService
+	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/${SQLTOOLSSERVICE_VERSION}/createdump
+	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/${SQLTOOLSSERVICE_VERSION}/MicrosoftKustoServiceLayer
+	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/${SQLTOOLSSERVICE_VERSION}/MicrosoftSqlToolsCredentials
+	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/${SQLTOOLSSERVICE_VERSION}/MicrosoftSqlToolsServiceLayer
+	fperms +x /opt/${PN}/resources/app/extensions/mssql/sqltoolsservice/Linux/${SQLTOOLSSERVICE_VERSION}/SqlToolsResourceProviderService
 	dosym "../../opt/${PN}/bin/${PN}" "usr/bin/${PN}"
 	dosym "../../usr/$(get_libdir)/libssl.so.1.0.0" /opt/${PN}/libssl.so.10
 	dosym "../../usr/$(get_libdir)/libcrypto.so.1.0.0" /opt/${PN}/libcrypto.so.10
