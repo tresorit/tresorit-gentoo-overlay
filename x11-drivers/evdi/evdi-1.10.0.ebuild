@@ -25,6 +25,13 @@ pkg_setup() {
 	linux-mod_pkg_setup
 }
 
+
+src_prepare() {
+	default
+	local KVER=$(cat "${KERNEL_DIR}/include/config/kernel.release")
+	sed -i "1i KVER := ${KVER}" "${S}/Makefile"
+}
+
 src_compile() {
 	linux-mod_src_compile
 	cd "${S}/library"
