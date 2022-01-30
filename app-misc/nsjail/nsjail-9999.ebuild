@@ -14,7 +14,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-libs/protobuf:="
+DEPEND="
+	dev-libs/libnl:=
+	dev-libs/protobuf:=
+"
 RDEPEND="${DEPEND}"
 
 PATCHES=( "${FILESDIR}/makefile.patch" )
