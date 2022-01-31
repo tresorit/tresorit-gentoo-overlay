@@ -3,7 +3,7 @@
 
 EAPI=7
 
-MY_P="VMware-ovftool-${PV}-16812187"
+MY_P="VMware-ovftool-${PV}-18663434"
 
 DESCRIPTION="VMware Open Virtualization Format Tool"
 HOMEPAGE="https://www.vmware.com/support/developer/ovf/"
