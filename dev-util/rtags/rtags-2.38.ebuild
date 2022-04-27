@@ -23,3 +23,5 @@ DEPEND="sys-devel/clang:=
 	sys-libs/zlib
 	dev-libs/openssl:0="
 RDEPEND="${DEPEND}"
+
+PATCHES="${FILESDIR}/${P}-bytecode.patch"

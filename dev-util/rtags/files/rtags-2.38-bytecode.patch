@@ -1,0 +1,22 @@
+From 74b50a79a7e0ae95b3bf7954a0c42bba923c5870 Mon Sep 17 00:00:00 2001
+From: Kent Bull <kent@kentbull.com>
+Date: Tue, 16 Mar 2021 17:03:13 -0700
+Subject: [PATCH] Comment out unused code
+
+---
+ src/rtags.el | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/rtags.el b/src/rtags.el
+index 32961934a..4964e7efc 100644
+--- a/src/rtags.el
++++ b/src/rtags.el
+@@ -4689,7 +4689,7 @@ definition."
+        (and rtags-autostart-diagnostics (rtags-diagnostics))
+        (set-process-query-on-exit-flag rtags-rdm-process nil)
+        (set-process-sentinel rtags-rdm-process 'rtags-sentinel)))))
+-(define-obsolete-function-alias 'rtags-start-process-maybe 'rtags-start-process-unless-running)
++;; (define-obsolete-function-alias 'rtags-start-process-maybe 'rtags-start-process-unless-running)
+ 
+ (defun rtags-sentinel (process _event)
+   "Watch the activity of RTags process (rdm)."
