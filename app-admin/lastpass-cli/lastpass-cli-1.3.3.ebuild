@@ -1,10 +1,10 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 CMAKE_WARN_UNUSED_CLI=no
-inherit cmake-utils bash-completion-r1
+inherit cmake bash-completion-r1
 
 DESCRIPTION="Interfaces with LastPass.com from the command line."
 HOMEPAGE="https://github.com/lastpass/lastpass-cli"
@@ -39,15 +39,15 @@ src_configure() {
 		-DBASH_COMPLETION_COMPLETIONSDIR="$(get_bashcompdir)"
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_compile() {
-	cmake-utils_src_compile all $(usex test lpass-test '')
+	cmake_src_compile all $(usex test lpass-test '')
 }
 
 src_install() {
-	cmake-utils_src_install install
+	cmake_src_install install
 
 	doman "${WORKDIR}"/man/lpass.1
 
@@ -67,5 +67,5 @@ src_test() {
 	sed -e "s|TEST_LPASS=.*|TEST_LPASS=\"${BUILD_DIR}/lpass-test\"|" \
 		-i "${S}"/test/include.sh || die
 
-	cmake-utils_src_test
+	cmake_src_test
 }
