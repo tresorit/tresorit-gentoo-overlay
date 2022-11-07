@@ -39,7 +39,11 @@ src_install() {
 	fperms +x /opt/${PN}/Ghidra/Features/Decompiler/os/linux_x86_64/decompile
 	fperms +x /opt/${PN}/Ghidra/Features/Decompiler/os/linux_x86_64/sleigh
 	fperms +x /opt/${PN}/ghidraRun
-	fperms +x /opt/${PN}/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v*
+
+	# See https://bugs.gentoo.org/714082
+	#fperms +x /opt/${PN}/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v*
+	chmod +x "${ED}"/opt/${PN}/GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v* || die
+
 	fperms +x /opt/${PN}/server/ghidraSvr
 	fperms +x /opt/${PN}/server/jaas_external_program.example.sh
 	fperms +x /opt/${PN}/server/svrAdmin
