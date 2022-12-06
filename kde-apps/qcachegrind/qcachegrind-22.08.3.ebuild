@@ -1,19 +1,19 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 KDE_ORG_NAME="kcachegrind"
-QTMIN=5.15.2
-inherit qmake-utils kde.org
+QTMIN=5.15.5
+inherit qmake-utils gear.kde.org
 
 DESCRIPTION="Frontend for Cachegrind by KDE (Qt-only version)"
-HOMEPAGE="https://apps.kde.org/en/kcachegrind
+HOMEPAGE="https://apps.kde.org/kcachegrind/
 https://kcachegrind.github.io/html/Home.html"
 
 LICENSE="GPL-2"
 SLOT="5"
-KEYWORDS="amd64 arm64 ~riscv ~x86"
+KEYWORDS="amd64 arm64 ~riscv x86"
 
 S="${WORKDIR}/${KDE_ORG_NAME}-${PV}"
 
@@ -23,8 +23,8 @@ BDEPEND="
 "
 DEPEND="
 	>=dev-qt/qtdbus-${QTMIN}:5
-	>=dev-qt/qtgui-${QTMIN}:5[gif,jpeg,png,X]
-	>=dev-qt/qtwidgets-${QTMIN}:5[png,X]
+	>=dev-qt/qtgui-${QTMIN}:5
+	>=dev-qt/qtwidgets-${QTMIN}:5
 "
 RDEPEND="${DEPEND}
 	media-gfx/graphviz
