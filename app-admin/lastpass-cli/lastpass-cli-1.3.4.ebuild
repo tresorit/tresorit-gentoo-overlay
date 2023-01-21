@@ -31,7 +31,7 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/"${PN}"-1.3.3-gcc10-fix.patch
-	"${FILESDIR}"/"${P}"-microsoft-authenticator.patch
+	"${FILESDIR}"/"${PN}"-1.3.4-iteration-fix.patch
 )
 
 src_configure() {
