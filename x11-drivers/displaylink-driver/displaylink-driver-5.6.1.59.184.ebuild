@@ -5,8 +5,8 @@ EAPI=8
 
 inherit udev
 
-AR_DATE="2022-05"
-AR_NAME="DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu5.6-EXE.zip"
+AR_DATE="2022-08"
+AR_NAME="DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu5.6.1-EXE.zip"
 UBUNTU_VER="1604"
 
 MY_PV=$(ver_rs 3 '-')
