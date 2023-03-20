@@ -24,6 +24,10 @@ DEPEND="x11-libs/libdrm"
 RDEPEND="${DEPEND}"
 BDEPEND="sys-kernel/linux-headers"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-fix-for-kernel-6.0.patch"
+)
+
 MODULE_NAMES="evdi(video:${S})"
 CONFIG_CHECK="~FB_VIRTUAL ~I2C"
 

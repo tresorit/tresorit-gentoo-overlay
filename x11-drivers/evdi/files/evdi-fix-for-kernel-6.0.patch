@@ -1,0 +1,13 @@
+diff --git a/evdi_drm_drv.h b/evdi_drm_drv.h
+index f9ed869..1a0a9e2 100644
+--- a/evdi_drm_drv.h
++++ b/evdi_drm_drv.h
+@@ -26,7 +26,7 @@
+ #include <drm/drmP.h>
+ #endif
+ #if KERNEL_VERSION(5, 15, 0) <= LINUX_VERSION_CODE
+-#include <drm/drm_legacy.h>
++#include <drm/drm_framebuffer.h>
+ #else
+ #include <drm/drm_irq.h>
+ #endif
