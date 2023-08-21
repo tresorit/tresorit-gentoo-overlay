@@ -7,11 +7,21 @@ inherit rpm xdg-utils
 
 DESCRIPTION="The world’s most-loved password manager"
 HOMEPAGE="https://1password.com"
-SRC_URI="amd64? ( https://downloads.1password.com/linux/rpm/stable/x86_64/${P}.x86_64.rpm -> ${P}.x86_64.rpm )"
+
+MY_PV=$(ver_rs 3 "-")
+CHANNEL="stable"
+KEYWORDS="amd64"
+
+if [[ "$MY_PV" =~ .*"beta".* ]]; then
+  MY_PV="${MY_PV//beta/}.BETA"
+  CHANNEL="beta"
+  KEYWORDS="~amd64"
+fi
+
+SRC_URI="amd64? ( https://downloads.1password.com/linux/rpm/${CHANNEL}/x86_64/${PN}-${MY_PV}.x86_64.rpm )"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="amd64"
 
 RESTRICT="mirror strip test bindist"
 
@@ -34,7 +44,7 @@ src_prepare() {
 }
 
 src_unpack() {
-  rpm_unpack ${P}.x86_64.rpm
+  rpm_unpack ${PN}-${MY_PV}.x86_64.rpm
 }
 
 src_install() {
