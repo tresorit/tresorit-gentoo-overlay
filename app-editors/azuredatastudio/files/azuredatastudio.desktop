@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Azure Data Studio
-Exec=/usr/bin/azuredatastudio --unity-launch %F
-Icon=azuredatastudio
-Type=Application
-StartupNotify=false
-Categories=Utility;TextEditor;Development;IDE;
-Keywords=azuredatastudio;
