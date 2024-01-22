@@ -19,7 +19,7 @@ RDEPEND="
 	app-crypt/mit-krb5
 	dev-libs/icu
 	|| ( dev-libs/openssl dev-libs/openssl-compat:1.0.0 )
-	dev-util/lldb
+	dev-debug/lldb
 	dev-util/lttng-ust
 	net-misc/curl
 	sys-apps/lsb-release
