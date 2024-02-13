@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index ca2c429..dfee943 100644
+index 35832a0..e25a607 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -21,19 +21,11 @@ ifeq ($(PKG_CONFIG),)
@@ -18,9 +18,9 @@ index ca2c429..dfee943 100644
 +COMMON_FLAGS += -c -D_GNU_SOURCE -Ikafel/include
  
  CXXFLAGS += $(USER_DEFINES) $(COMMON_FLAGS) $(shell pkg-config --cflags protobuf) \
--	-std=c++14 -fno-exceptions -Wno-unused -Wno-unused-parameter
+-	-std=c++17 -fno-exceptions -Wno-unused -Wno-unused-parameter
 -LDFLAGS += -pie -Wl,-z,noexecstack -lpthread $(shell pkg-config --libs protobuf)
-+	-std=c++14 -fno-exceptions
++	-std=c++17 -fno-exceptions
 +LDFLAGS += -lpthread $(shell pkg-config --libs protobuf)
  
  BIN = nsjail
