@@ -1,20 +1,19 @@
-# Copyright 2021 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 inherit unpacker
 
-DESCRIPTION="zynamics BinDiff"
-HOMEPAGE="https://www.zynamics.com/index.html"
-SRC_URI="https://storage.googleapis.com/bindiff-releases/updated-20210607/bindiff_7_amd64.deb"
-
-LICENSE="zynamics"
-SLOT="0"
-KEYWORDS="amd64"
-IUSE=""
+DESCRIPTION="Comparison tool for binary files"
+HOMEPAGE="https://github.com/google/bindiff/"
+SRC_URI="https://github.com/google/bindiff/releases/download/v${PV}/bindiff_${PV}_amd64.deb"
 
 S=${WORKDIR}
 QA_PREBUILT="*"
+
+LICENSE="Apache-2.0"
+SLOT="0"
+KEYWORDS="amd64"
 
 src_install() {
 	dodoc -r usr/share/doc
