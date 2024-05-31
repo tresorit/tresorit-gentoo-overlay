@@ -1,0 +1,2 @@
+move app-misc/1password app-admin/1password
+move app-misc/1password-cli app-admin/op-cli-bin
